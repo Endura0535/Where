@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace='com.ssafy.enjoytrip.model.dao.UserDao'>
+
+	<!-- 자주 사용하는 동적 쿼리를 sql에 지정해서 재사용하기 -->
+	<sql id="searchCon">
+		<if test="word != null and word !='' ">
+			<choose>
+				<when test=" key == 'empno' ">
+					empno = #{word}
+				</when>
+				<when test=" key == 'name' ">
+					name like concat('%', #{word}, '%')
+				</when>
+				<when test=" key == 'email' ">
+					email like concat('%', #{word}, '%')
+				</when>
+			</choose>
+		</if>
+	</sql>
+
+	<!-- id는 Dao의 메서드 이름과 동일해야 한다. -->
+
+	<select id="getAttractionList" parameterType="AreaCodeDto" resultType = "AttractionDto">
+		select *
+		from attraction_info
+		where sido_code = #{sidoCode}
+		and gugun_code = #{gugunCode}
+		and contentTypeId = #{content_type_id}
+	</select>
+
+	<select id="getGugunList" parameterType="int" resultType="GugunDto">
+		select *
+		from gugun
+		where sido_code = #{sidoCode}
+	</select>
+	
+	<select id = "getSidoList" resultType="SidoDto">
+		select *
+		from sido
+	</select>
+	
+	<select id="getDetailInfo" parameterType="int" resultType="DetailDto">
+		select title, addr1 , addr2 , first_image , overview , zipcode , tel
+		from attraction_info ai , attraction_description ad
+		where ai.content_id = #{contentId} and ai.content_id = ad.content_id;
+	</select>
+	
+	<select id="getHotPlace" parameterType="int" resultType="HotPlaceDto">
+		select distinct * from hotplace 
+		where content_id = #{contentId}
+	</select>
+	
+	<select id="getAllHotPlace" resultType="HotPlaceDto">
+		select *, count(*) as count 
+		from hotplace 
+		where 
+	</select>
+	
+	<insert id="insertHotPlace" parameterType="HotPlaceDto">
+		insert into hotplace values (#{contentId},#{uid});
+	</insert>
+	
+	<update id="updateHotPlace" parameterType="int">
+		update hotplace set count = count+1 where content_id = #{contentId}
+	</update>
+
+	
+
+</mapper>
