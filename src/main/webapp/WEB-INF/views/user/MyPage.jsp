@@ -82,7 +82,7 @@
 									</ul>
 								</div>
 								<div class="d-flex align-items-center justify-content-end">
-								<a class="btn w-25 border border-2 rounded-3 text-bg-secondary" href='${root}/user?action=modifyForm'>수정하기</a>
+								<a class="btn w-25 border border-2 rounded-3 text-bg-secondary" href='${root}/user/modifyForm'>수정하기</a>
 								<a class="btn w-25 border border-2 rounded-3 text-bg-danger" href='${root}/user?action=deleteAccount'>회원 탈퇴</a>
 								</div>
 							</div>

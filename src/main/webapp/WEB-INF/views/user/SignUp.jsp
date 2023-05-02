@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/common/header.jsp"%>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <body>
-	<%@ include file="/common/nav.jsp"%>
-	<%@ include file="/common/SignIn.jsp"%>
+	<%@ include file="/WEB-INF/views/common/nav.jsp"%>
+	<%@ include file="/WEB-INF/views/common/SignIn.jsp"%>
 
 	<main id="main"> <!-- ======= Intro Single ======= -->
 	<section class="intro-single">
@@ -31,7 +31,7 @@
 	<div class="container">
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
-				<form action="${root}/user?action=regist" method="post">
+				<form action="${root}/user/regist" method="post">
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="id">아이디</label> <input type="text"
@@ -40,7 +40,7 @@
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="pw">비밀번호</label> <input type="password"
-								class="form-control" id="pw" name="pw" placeholder="비밀번호 입력" />
+								class="form-control" id="pass" name="pass" placeholder="비밀번호 입력" />
 						</div>
 					</div>
 					<div class="mb-3">
@@ -74,7 +74,7 @@
 	</main>
 	<!-- End #main -->
 
-	<%@ include file="/common/footer.jsp"%>
+	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 
 </body>
 

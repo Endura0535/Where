@@ -39,7 +39,7 @@
 					<div class="d-flex align-content-center justify-content-center">
 						<a href="${root}/user/findPwForm.jsp"
 							class="ms-5 me-5 mt-3 md-3 text-black-50">ID/Password 찾기</a> <a
-							href="${root}/user/SignUp.jsp"
+							href="${root}/user/signup"
 							class="ms-5 me-5 mt-3 md-3 text-black-50">회원가입</a>
 					</div>
 				</form>

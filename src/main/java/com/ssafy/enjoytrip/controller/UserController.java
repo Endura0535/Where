@@ -52,5 +52,52 @@ public class UserController {
 		logger.info("User............................mypage");
 		return "user/MyPage";
 	}
+	
+	@GetMapping("/signup")
+	public String signup(HttpSession session) {
+		logger.info("User............................signup");
+		return "user/SignUp";
+	}
+	
+	@PostMapping("/regist")
+	public String regist(User regiUser, HttpSession session) {
+		logger.debug("User............................regist user:" + regiUser);
 
+		userService.regist(regiUser);
+		return "redirect:/index";
+	}
+
+	@GetMapping("/modifyForm")
+	public String modifyForm(HttpSession session) {
+		logger.info("User............................modifyForm으로 이동");
+		return "user/UserInfoModify";
+	}
+	
+	@PostMapping("/modify")
+	public String modify(User modiUser, HttpSession session) {
+		logger.info("User............................modify		 user:" + modiUser);
+		User user = (User)session.getAttribute("userInfo");
+		logger.debug(user.getId());
+		
+		String modiAtt = modiUser.getpass();
+		if(modiAtt != null)
+			user.setpass(modiAtt);
+		
+		modiAtt = modiUser.getEmail();
+		if(modiAtt != null)
+			user.setEmail(modiAtt);
+		
+		modiAtt = modiUser.getAddr1();
+		if(modiAtt != null)
+			user.setAddr1(modiAtt);
+		
+		modiAtt = modiUser.getAddr2();
+		if(modiAtt != null)
+			user.setAddr2(modiAtt);
+		
+		logger.debug("User............................modify		 user:" + user);
+
+		userService.update(user);
+		return "user/MyPage";
+	}
 }

@@ -5,23 +5,6 @@
 
 <mapper namespace='com.ssafy.enjoytrip.model.dao.UserDao'>
 
-	<!-- 자주 사용하는 동적 쿼리를 sql에 지정해서 재사용하기 -->
-	<sql id="searchCon">
-		<if test="word != null and word !='' ">
-			<choose>
-				<when test=" key == 'empno' ">
-					empno = #{word}
-				</when>
-				<when test=" key == 'name' ">
-					name like concat('%', #{word}, '%')
-				</when>
-				<when test=" key == 'email' ">
-					email like concat('%', #{word}, '%')
-				</when>
-			</choose>
-		</if>
-	</sql>
-
 	<!-- id는 Dao의 메서드 이름과 동일해야 한다. -->
 
 	<insert id="regist" parameterType="User">
@@ -48,8 +31,7 @@
 
 	<delete id="remove" parameterType="string">
 		delete from user
-		where id =
-		#{id}
+		where id = #{id}
 	</delete>
 
 </mapper>

@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/common/header.jsp"%>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 <body>
-	<%@ include file="/common/SignIn.jsp"%>
-	<%@ include file="/common/nav.jsp"%>
+	<%@ include file="/WEB-INF/views/common/SignIn.jsp"%>
+	<%@ include file="/WEB-INF/views/common/nav.jsp"%>
 
 	<!-- ======= Property Search Section ======= -->
 	<div class="click-closed"></div>
@@ -115,30 +115,30 @@
 	<div class="container">
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
-				<form action="${root}/user?action=modify" method="post">
+				<form action="${root}/user/modify" method="post">
 					<div class="mb-3">
 						<label for="pw">새 비밀번호</label> <input type="text"
 							class="form-control" id="pw" name="pw" placeholder="새 비밀번호"
-							required>
+							>
 						<div class="invalid-feedback">비밀번호를 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
 						<label for="pwCheck">비밀번호 확인</label> <input type="text"
 							class="form-control" id="pwCheck" name="pwCheck"
-							placeholder="비밀번호 확인" required>
+							placeholder="비밀번호 확인" >
 						<div class="invalid-feedback">비밀번호를 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
 						<label for="email">이메일</label> <input type="email"
 							class="form-control" id="email" name="email"
-							placeholder="${userInfo.email}" required>
+							placeholder="${userInfo.email}" >
 						<div class="invalid-feedback">이메일을 입력해주세요.</div>
 					</div>
 
 					<div class="mb-3">
 						<label for="addr1">주소</label> <input type="text"
 							class="form-control" id="addr1" name="addr1"
-							placeholder="${userInfo.addr1}" required>
+							placeholder="${userInfo.addr1}" >
 						<div class="invalid-feedback">주소를 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
@@ -156,7 +156,7 @@
 	</main>
 	<!-- End #main -->
 
-	<%@ include file="/common/footer.jsp"%>
+	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 
 </body>
 
