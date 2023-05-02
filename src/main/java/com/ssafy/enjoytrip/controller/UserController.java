@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -75,29 +76,36 @@ public class UserController {
 	
 	@PostMapping("/modify")
 	public String modify(User modiUser, HttpSession session) {
-		logger.info("User............................modify		 user:" + modiUser);
+		logger.info("User............................modify		 modiuser:" + modiUser);
 		User user = (User)session.getAttribute("userInfo");
-		logger.debug(user.getId());
+		logger.debug(user.toString());
 		
 		String modiAtt = modiUser.getpass();
-		if(modiAtt != null)
+		if(modiAtt != null && modiAtt != "")
 			user.setpass(modiAtt);
 		
 		modiAtt = modiUser.getEmail();
-		if(modiAtt != null)
+		if(modiAtt != null && modiAtt != "")
 			user.setEmail(modiAtt);
 		
 		modiAtt = modiUser.getAddr1();
-		if(modiAtt != null)
+		if(modiAtt != null && modiAtt != "")
 			user.setAddr1(modiAtt);
 		
 		modiAtt = modiUser.getAddr2();
-		if(modiAtt != null)
+		if(modiAtt != null && modiAtt != "")
 			user.setAddr2(modiAtt);
 		
-		logger.debug("User............................modify		 user:" + user);
-
+		logger.info("User............................modify		 modiuser:" + user);
+		
 		userService.update(user);
 		return "user/MyPage";
+	}
+	
+	@DeleteMapping("/deleteAccount")
+	public String deleteAccount(HttpSession session) {
+		logger.info("User............................modifyForm으로 이동");
+		userService.remove(session.getId());
+		return "index";
 	}
 }
