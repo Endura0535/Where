@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.ssafy.enjoytrip.model.dto.SidoDto;
+import com.ssafy.enjoytrip.model.dto.AreaCodeDto;
 import com.ssafy.enjoytrip.model.dto.AttractionDto;
 import com.ssafy.enjoytrip.model.dto.DetailDto;
 import com.ssafy.enjoytrip.model.dto.GugunDto;
@@ -11,7 +12,7 @@ import com.ssafy.enjoytrip.model.dto.HotPlaceDto;
 
 public interface TripDao {
 
-	List<AttractionDto> getAttractionList(int sidoCode, int gugunCode, int contentTypeId) throws SQLException;
+	List<AttractionDto> getAttractionList(AreaCodeDto areaCodeDto) throws SQLException;
 
 	List<SidoDto> getSidoList() throws SQLException;
 

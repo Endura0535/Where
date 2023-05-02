@@ -2,6 +2,8 @@ package com.ssafy.enjoytrip;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,6 +12,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.ssafy.enjoytrip.model.dao.TripDao;
+import com.ssafy.enjoytrip.model.dto.AreaCodeDto;
+import com.ssafy.enjoytrip.model.dto.AttractionDto;
 
 @SpringBootTest
 class EnjoytripApplicationTests {
@@ -22,6 +28,9 @@ class EnjoytripApplicationTests {
 	
 //	@Autowired
 //	private UserDao dao;
+	
+	@Autowired
+	private TripDao dao;
 	
 	
 	@Autowired
@@ -37,24 +46,13 @@ class EnjoytripApplicationTests {
 		assertNotNull(datasource);
 		
 	}
+	
 	@Test
-	public void daoTest() throws Exception{
-		logger.debug("session :{}",session);
-		assertNotNull(session);
-
+	public void getAttractionListTest() throws Exception{
+		List<AttractionDto> list = dao.getAttractionList(new AreaCodeDto(1,1,12));
+		logger.debug("oksubin : {} " ,list);
+		assertNotNull(list);
+		
 	}
-//	@Test
-//	public void daoTest() throws Exception{
-//		logger.debug("dao :{}",dao);
-//		assertNotNull(dao);
-//
-//	}
-//	
-//	@Test
-//	public void searchAllTest() throws Exception{
-//		User user = dao.search("hi");
-//		assertNotNull(user);
-//		logger.debug("books size : {}", user);
-//	}
 
 }
