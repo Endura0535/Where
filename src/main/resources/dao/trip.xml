@@ -47,11 +47,5 @@
 	<insert id="insertHotPlace" parameterType="HotPlaceDto">
 		insert into hotplace values (#{contentId},#{uid})
 	</insert>
-	
-	<update id="updateHotPlace" parameterType="int">
-		update hotplace set count = count+1 where content_id = #{contentId}
-	</update>
-
-	
 
 </mapper>

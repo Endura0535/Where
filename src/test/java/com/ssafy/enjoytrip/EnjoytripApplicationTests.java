@@ -45,6 +45,18 @@ class EnjoytripApplicationTests {
 		logger.debug("datasource :{}",datasource);
 		assertNotNull(datasource);	
 	}
+	@Test
+	public void SqlSessionTest() throws Exception{
+		logger.debug("datasource :{}",session);
+		assertNotNull(session);
+		
+	}
+	@Test
+	public void TripDaoTest() throws Exception{
+		logger.debug("datasource :{}",dao);
+		assertNotNull(dao);
+		
+	}
 	
 	@Test
 	public void getAttractionListTest() throws Exception{
