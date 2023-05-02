@@ -25,11 +25,16 @@ public class UserServiceImp implements UserService {
 	}
 
 	public User login(String id, String pw) {
+		System.out.println(id + "    " + pw);
 		try {
 			User user = dao.search(id);
+			System.out.println(user);
 
-			if (user == null)
+			if (user == null) {
+				System.out.println("user null");
 				throw new BookException("등록되지 않은 아이디입니다.");
+			}
+				
 
 			if (!BCrypt.checkpw(pw, user.getpass()))
 				throw new BookException("비밀 번호 오류 발생!!!!");
