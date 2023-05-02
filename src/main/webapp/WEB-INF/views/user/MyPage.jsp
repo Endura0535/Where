@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../common/header.jsp"%>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 <body>
-	<%@ include file="../common/SignIn.jsp"%>
-	<%@ include file="../common/nav.jsp"%>
+	<%@ include file="/WEB-INF/views/common/SignIn.jsp"%>
+	<%@ include file="/WEB-INF/views/common/nav.jsp"%>
 
 	<main id="main"> <!-- ======= Intro Single ======= -->
 	<section class="intro-single">
@@ -21,7 +21,7 @@
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="${root}/user">Home</a></li>
 							<li class="breadcrumb-item"><a
-								href="${root}/user?action=mypage">My Page</a></li>
+								href="${root}/user/mypage">My Page</a></li>
 						</ol>
 					</nav>
 				</div>
@@ -35,7 +35,7 @@
 				<div class="col-sm-12">
 					<div class="row align-content-center">
 						<div class="col-md-6 d-flex justify-content-center">
-							<img src="assets/img/defaultProfile.jpg" alt=""
+							<img src="../assets/img/defaultProfile.jpg" alt=""
 								class="agent-avatar img-fluid rounded-circle">
 						</div>
 						<div
@@ -110,7 +110,7 @@
 					<div class="col-md-4">
 						<div class="card-box-a card-shadow">
 							<div class="img-box-a">
-								<img src="assets/img/property-1.jpg" alt=""
+								<img src="../assets/img/property-1.jpg" alt=""
 									class="img-a img-fluid">
 							</div>
 							<div class="card-overlay">
@@ -153,7 +153,7 @@
 					<div class="col-md-4">
 						<div class="card-box-a card-shadow">
 							<div class="img-box-a">
-								<img src="assets/img/property-3.jpg" alt=""
+								<img src="../assets/img/property-3.jpg" alt=""
 									class="img-a img-fluid">
 							</div>
 							<div class="card-overlay">
@@ -196,7 +196,7 @@
 					<div class="col-md-4">
 						<div class="card-box-a card-shadow">
 							<div class="img-box-a">
-								<img src="assets/img/property-6.jpg" alt=""
+								<img src="../assets/img/property-6.jpg" alt=""
 									class="img-a img-fluid">
 							</div>
 							<div class="card-overlay">
@@ -260,7 +260,7 @@
 					<div class="col-md-4">
 						<div class="card-box-a card-shadow">
 							<div class="img-box-a">
-								<img src="assets/img/property-1.jpg" alt=""
+								<img src="../assets/img/property-1.jpg" alt=""
 									class="img-a img-fluid">
 							</div>
 							<div class="card-overlay">
@@ -303,7 +303,7 @@
 					<div class="col-md-4">
 						<div class="card-box-a card-shadow">
 							<div class="img-box-a">
-								<img src="assets/img/property-3.jpg" alt=""
+								<img src="../assets/img/property-3.jpg" alt=""
 									class="img-a img-fluid">
 							</div>
 							<div class="card-overlay">
@@ -346,7 +346,7 @@
 					<div class="col-md-4">
 						<div class="card-box-a card-shadow">
 							<div class="img-box-a">
-								<img src="assets/img/property-6.jpg" alt=""
+								<img src="../assets/img/property-6.jpg" alt=""
 									class="img-a img-fluid">
 							</div>
 							<div class="card-overlay">
@@ -394,7 +394,7 @@
 	</section>
 	<!-- End Agent Single --> </main>
 	<!-- End #main -->
-	<%@ include file="../common/footer.jsp"%>
+	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 
 </html>

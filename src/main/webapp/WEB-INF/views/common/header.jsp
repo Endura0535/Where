@@ -14,21 +14,19 @@
 <meta content="" name="keywords">
 
 <!-- Favicons -->
-<link href="assets/img/favicon.png" rel="icon">
+<link href="/enjoytrip/assets/img/favicon.png" rel="icon">
 <link href="assets/img/apple-touch-icon.png"
 	rel="apple-touch-icon">
 
 <!-- Vendor CSS Files -->
-<link href="assets/vendor/animate.css/animate.min.css"
+<link href="/enjoytrip/assets/vendor/animate.css/animate.min.css"
 	rel="stylesheet">
-<link href="assets/vendor/bootstrap/css/bootstrap.min.css"
+<link href="/enjoytrip/assets/vendor/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
-<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+<link href="/enjoytrip/assets/vendor/bootstrap-icons/bootstrap-icons.css"
 	rel="stylesheet">
-<link href="assets/vendor/swiper/swiper-bundle.min.css"
+<link href="/enjoytrip/assets/vendor/swiper/swiper-bundle.min.css"
 	rel="stylesheet">
-
-<!-- Template Main CSS File -->
 
 <!-- Font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,20 +40,10 @@
 	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"
 	rel="stylesheet">
 
-<!-- Vendor CSS Files -->
-<link href="assets/vendor/animate.css/animate.min.css"
-	rel="stylesheet">
-<link href="assets/vendor/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
-<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
-	rel="stylesheet">
-<link href="assets/vendor/swiper/swiper-bundle.min.css"
-	rel="stylesheet">
-
 <!-- Template Main CSS File -->
-<link href="assets/css/style.css" rel="stylesheet">
+<link href="/enjoytrip/assets/css/style.css" rel="stylesheet">
 
-<script src="assets/js/key.js"></script>
+<script src="/enjoytrip/assets/js/key.js"></script>
 <form>
 	<input type="hidden" name="referer" value="${referer}">
 </form>
