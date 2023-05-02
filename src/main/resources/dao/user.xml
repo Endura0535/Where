@@ -3,9 +3,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace='com.ssafy.enjoytrip.model.dao.TripDao'>
+<mapper namespace='com.ssafy.enjoytrip.model.dao.UserDao'>
 
 	<!-- id는 Dao의 메서드 이름과 동일해야 한다. -->
+
+	<insert id="regist" parameterType="User">
+		insert into user (id, name,
+		pass, email, addr1, addr2)
+		values(#{id},#{name},#{pass},#{email},#{addr1},#{addr2})
+	</insert>
 
 	<select id="search" parameterType="string" resultType="User">
 		select *
