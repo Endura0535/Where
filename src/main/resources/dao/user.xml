@@ -25,8 +25,7 @@
 		email=#{email},
 		addr1=#{addr1},
 		addr2=#{addr2}
-		where
-		id=#{id}
+		where id=#{id}
 	</update>
 
 	<delete id="remove" parameterType="string">
