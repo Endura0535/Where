@@ -102,10 +102,13 @@ public class UserController {
 		return "user/MyPage";
 	}
 	
-	@DeleteMapping("/deleteAccount")
+	@GetMapping("/deleteAccount")
 	public String deleteAccount(HttpSession session) {
-		logger.info("User............................modifyForm으로 이동");
-		userService.remove(session.getId());
-		return "index";
+		User user = (User)session.getAttribute("userInfo");
+		logger.info("User............................delete" + user.getId());
+
+		userService.remove(user.getId());
+		session.invalidate();
+		return "redirect:/index";
 	}
 }

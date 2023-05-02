@@ -43,8 +43,7 @@ class EnjoytripApplicationTests {
 	@Test
 	public void dataSourceTest() throws Exception{
 		logger.debug("datasource :{}",datasource);
-		assertNotNull(datasource);
-		
+		assertNotNull(datasource);	
 	}
 	
 	@Test
@@ -52,7 +51,6 @@ class EnjoytripApplicationTests {
 		List<AttractionDto> list = dao.getAttractionList(new AreaCodeDto(1,1,12));
 		logger.debug("oksubin : {} " ,list);
 		assertNotNull(list);
-		
 	}
 
 }
