@@ -5,6 +5,42 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
+<head>
+<script type="text/javascript">
+window.onload=function(){
+	  if (document.querySelector("#search")) {
+	    document.querySelector("#search").addEventListener('click', function() {
+	      let form = document.querySelector("#frm");
+	      document.querySelector("#pageNo").value='1'
+	      form.submit();
+	    });
+	  }
+	  if (document.querySelector("#word")) {
+	    document.querySelector("#word").value='${param.word}';
+	  }
+	  <c:choose>
+	    <c:when test='${!empty param.pageNo}'>
+	      document.querySelector("#pageNo").value='${param.pageNo}';
+	    </c:when>
+	    <c:otherwise>
+	      document.querySelector("#pageNo").value='1';
+	    </c:otherwise>
+	  </c:choose>
+	  <c:if test='${!empty param.key}'>
+	    document.querySelector("#key").value='${param.key}';
+	  </c:if>
+	  let pages = document.querySelectorAll(".page-link");
+	  pages.forEach(function (page) {
+	    page.addEventListener("click", function () {
+	      document.querySelector("#pageNo").value= this.getAttribute("data-pg");
+	      let form = document.querySelector("#frm");
+	      form.setAttribute("action", "${root}/article/list");
+	      form.submit();
+	    });
+	  });	
+	}
+</script>
+</head>
 <body>
 	<%@ include file="/WEB-INF/views/common/SignIn.jsp"%>
 	<%@ include file="/WEB-INF/views/common/nav.jsp"%>
@@ -98,36 +134,6 @@
 					<div class="col">${pageBean.pageLink}</div>
 				</div>
 			</div>
-			<script type="text/javascript">
-	window.onload=function(){
-			document.querySelector("#search").addEventListener('click', function() {
-				let form = document.querySelector("#frm");
-				document.querySelector("#pageNo").value='1'
-				form.submit();
-			})
-			document.querySelector("#word").value='${param.word}'
-			<c:choose>
-				<c:when test='${!empty param.pageNo}'>
-					document.querySelector("#pageNo").value='${param.pageNo}'
-				</c:when>
-				<c:otherwise>
-					document.querySelector("#pageNo").value='1'
-				</c:otherwise>
-			</c:choose>
-			<c:if test='${!empty param.key}'>
-				document.querySelector("#key").value='${param.key}'
-			</c:if>
-			 let pages = document.querySelectorAll(".page-link");
-		      pages.forEach(function (page) {
-		        page.addEventListener("click", function () {
-		          document.querySelector("#pageNo").value= this.getAttribute("data-pg");
-		          let form = document.querySelector("#frm");
-		          form.setAttribute("action", "${root}/article/list");
-		          form.submit();
-		        });
-		      });	
-	}
-</script>
 			<!-- 			<form id="form-param" method="get" action="">
 				<input type="hidden" id="p-action" name="action" value=""> <input
 					type="hidden" id="p-pgno" name="pgno" value=""> <input
