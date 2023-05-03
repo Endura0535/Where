@@ -9,18 +9,16 @@ import com.ssafy.enjoytrip.model.dao.UserDao;
 import com.ssafy.enjoytrip.model.dto.BookException;
 import com.ssafy.enjoytrip.model.dto.User;
 
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@RequiredArgsConstructor
 @Service
 public class UserServiceImp implements UserService {
 		
-	private UserDao dao;
-	public UserServiceImp(UserDao dao) {
-		super();
-		this.dao = dao;
-		System.out.println("UserServiceImp........................dao:"+dao);
-	}
+	private final UserDao dao;
 
 	public User login(String id, String pw) {
 		System.out.println(id + "    " + pw);

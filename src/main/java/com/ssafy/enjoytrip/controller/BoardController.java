@@ -34,12 +34,13 @@ import com.ssafy.enjoytrip.model.service.BoardService;
 import com.ssafy.enjoytrip.util.PageNavigation;
 import com.ssafy.enjoytrip.util.ParameterCheck;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/article")
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	private Logger logger = LoggerFactory.getLogger(BoardController.class);
 
 	@Autowired
 	private BoardService boardService;
@@ -47,68 +48,83 @@ public class BoardController extends HttpServlet {
 	private int pgno;
 	private String key;
 	private String word;
-	private String queryStrig;
+	private String queryString;
 	private String sortKey;
 
 	@GetMapping("/list")
-	private String list(HttpServletRequest request, HttpServletResponse response) {
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("userInfo");
-		System.out.println(user);
-		if (user != null) {
-			try {
-				Map<String, String> map = new HashMap<String, String>();
-				map.put("pgno", pgno + "");
-				map.put("key", key);
-				map.put("word", word);
-
-				List<Board> list = boardService.listArticle(map);
-
-				switch (sortKey) {
-				case "article_no":
-					Collections.sort(list, new Comparator<Board>() {
-						@Override
-						public int compare(Board o1, Board o2) {
-							return o1.getArticleNo() - o2.getArticleNo();
-						}
-					});
-					break;
-				case "view_count":
-					Collections.sort(list, new Comparator<Board>() {
-						@Override
-						public int compare(Board o1, Board o2) {
-							return o2.getHit() - o1.getHit();
-						}
-					});
-					break;
-				case "subject":
-					Collections.sort(list, new Comparator<Board>() {
-						@Override
-						public int compare(Board o1, Board o2) {
-							return o1.getSubject().compareTo(o2.getSubject());
-						}
-					});
-					break;
-				}
-
-				request.setAttribute("articles", list);
-
-				System.out.println(list);
-
-				PageNavigation pageNavigation = boardService.makePageNavigation(map);
-				request.setAttribute("navigation", pageNavigation);
-
-				return "index" + queryStrig;
-			} catch (Exception e) {
-				e.printStackTrace();
-				request.setAttribute("msg", "글목록 출력 중 문제 발생!!!");
-				return "error/error";
-			}
-		} else {
-			alertAndClose(response, "로그인 후 접속할 수 있는 페이지입니다.");
-			return "index";
-		}
+	public String boardList(PageBean bean, Model model) throws Exception {
+		log.debug("articleslist....................pageBean:{}",bean);
+		List<Board> articles = boardService.listArticle(bean);
+		log.debug("articleslist....................{}",articles);
+		model.addAttribute("articles", articles);
+		return "board/InfoBoard";
 	}
+//	private String listArticle(PageBean bean, HttpServletRequest request, HttpServletResponse response) {
+//		HttpSession session = request.getSession();
+//		User user = (User) session.getAttribute("userInfo");
+//		System.out.println(user);
+//		if (user != null) {
+//			try {
+//				Map<String, String> map = new HashMap<String, String>();
+//				map.put("pgno", pgno + "");
+//				map.put("key", key);
+//				map.put("word", word);
+//				
+//				log.debug("pgno: " + pgno + " key: " + key + " word: " + word);
+//
+//				List<Board> list = boardService.listArticle(bean);
+//				
+//				log.debug(list.toString());
+//				
+////				if(sor)
+////				switch (sortKey) {
+////				case "article_no":
+////					Collections.sort(list, new Comparator<Board>() {
+////						@Override
+////						public int compare(Board o1, Board o2) {
+////							return o1.getArticleNo() - o2.getArticleNo();
+////						}
+////					});
+////					break;
+////				case "view_count":
+////					Collections.sort(list, new Comparator<Board>() {
+////						@Override
+////						public int compare(Board o1, Board o2) {
+////							return o2.getHit() - o1.getHit();
+////						}
+////					});
+////					break;
+////				case "subject":
+////					Collections.sort(list, new Comparator<Board>() {
+////						@Override
+////						public int compare(Board o1, Board o2) {
+////							return o1.getSubject().compareTo(o2.getSubject());
+////						}
+////					});
+////					break;
+////				}
+//
+//				request.setAttribute("articles", list);
+//
+//				log.debug("list: " + list);
+//
+////				PageNavigation pageNavigation = boardService.makePageNavigation(map);
+////				request.setAttribute("navigation", pageNavigation);
+//				
+//				if(queryString == null)
+//					queryString = "";
+//
+//				return "/board/InfoBoard" + queryString;
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//				request.setAttribute("msg", "글목록 출력 중 문제 발생!!!");
+//				return "error/error";
+//			}
+//		} else {
+//			alertAndClose(response, "로그인 후 접속할 수 있는 페이지입니다.");
+//			return "index";
+//		}
+//	}
 
 	//	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	//			throws ServletException, IOException {
