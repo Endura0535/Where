@@ -5,10 +5,29 @@
 
 <mapper namespace='com.ssafy.enjoytrip.model.dao.TripDao'>
 
+	<resultMap id="attractionResultMap" type="AttractionDto">
+  <result property="contentId" column="content_id" />
+  <result property="address1" column="addr1"/>
+  <result property="address2" column="addr2"/>
+  <result property="title" column="title"/>
+  <result property="imgPath" column="first_image"/>
+  <result property="latitude" column="latitude"/>
+  <result property="longitude" column="longitude"/>
+	</resultMap>
+	
+	<resultMap id="DetailDtoMap" type="DetailDto">
+  <result property="address1" column="addr1"/>
+  <result property="address2" column="addr2"/>
+  <result property="title" column="title"/>
+  <result property="overview" column="overview"/>
+  <result property="imgPath" column="first_image"/>
+  <result property="zipCode" column="zipCode"/>
+  <result property="telNumber" column="tel"/>
+	</resultMap>
 
 	<!-- id는 Dao의 메서드 이름과 동일해야 한다. -->
 
-	<select id="getAttractionList" parameterType="AreaCodeDto" resultType = "AttractionDto">
+	<select id="getAttractionList" parameterType="AreaCodeDto" resultMap = "attractionResultMap">
 		select *
 		from attraction_info
 		where sido_code = #{sidoCode}
@@ -17,17 +36,17 @@
 	</select>
 
 	<select id="getGugunList" parameterType="int" resultType="GugunDto">
-		select *
+		select gugun_code as gugunCode, gugun_name as gugunName
 		from gugun
 		where sido_code = #{sidoCode}
 	</select>
 	
 	<select id = "getSidoList" resultType="SidoDto">
-		select *
+		select sido_code as sidoCode, sido_name as sidoName
 		from sido
 	</select>
 	
-	<select id="getDetailInfo" parameterType="int" resultType="DetailDto">
+	<select id="getDetailInfo" parameterType="int" resultMap="DetailDtoMap">
 		select title, addr1 , addr2 , first_image , overview , zipcode , tel
 		from attraction_info ai , attraction_description ad
 		where ai.content_id = #{contentId} and ai.content_id = ad.content_id
