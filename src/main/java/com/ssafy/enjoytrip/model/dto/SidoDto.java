@@ -2,33 +2,34 @@ package com.ssafy.enjoytrip.model.dto;
 
 public class SidoDto {
 
-	private int areaCode;
-	private String areaName;
+	private int sidoCode;
+	private String sidoName;
 
 	public int getAreaCode() {
-		return areaCode;
+		return sidoCode;
 	}
 
 	public void setAreaCode(int areaCode) {
-		this.areaCode = areaCode;
+		this.sidoCode = areaCode;
 	}
 
 	public String getAreaName() {
-		return areaName;
+		return sidoName;
 	}
 
 	public void setAreaName(String areaName) {
-		this.areaName = areaName;
+		this.sidoName = areaName;
 	}
 
 	public SidoDto(int areaCode, String areaName) {
 		super();
-		this.areaCode = areaCode;
-		this.areaName = areaName;
+		this.sidoCode = areaCode;
+		this.sidoName = areaName;
 	}
 
-	private SidoDto() {
-		super();
+	@Override
+	public String toString() {
+		return "SidoDto [sidoCode=" + sidoCode + ", sidoName=" + sidoName + "]";
 	}
 
 }

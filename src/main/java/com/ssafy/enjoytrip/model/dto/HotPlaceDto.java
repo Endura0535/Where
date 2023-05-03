@@ -2,7 +2,7 @@ package com.ssafy.enjoytrip.model.dto;
 
 public class HotPlaceDto {
 	private int contentId;
-	private int uid;
+	private String uid;
 	private int likes;
 	
 	public int getContentId() {
@@ -13,11 +13,11 @@ public class HotPlaceDto {
 		this.contentId = contentId;
 	}
 	
-	public int getUid() {
+	public String getUid() {
 		return uid;
 	}
 	
-	public void setUid(int uid) {
+	public void setUid(String uid) {
 		this.uid = uid;
 	}
 	
@@ -29,10 +29,17 @@ public class HotPlaceDto {
 		this.likes = likes;
 	}
 	
-	public HotPlaceDto(int contentId, int uid, int likes) {
+	public HotPlaceDto(int contentId, String uid, int likes) {
 		super();
 		this.contentId = contentId;
 		this.uid = uid;
 		this.likes = likes;
 	}
+
+	@Override
+	public String toString() {
+		return "HotPlaceDto [contentId=" + contentId + ", uid=" + uid + ", likes=" + likes + "]";
+	}
+	
+	
 }

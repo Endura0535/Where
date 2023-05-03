@@ -27,8 +27,9 @@ public class GugunDto {
 		this.gugunName = gugunName;
 	}
 
-	private GugunDto() {
-		super();
+	@Override
+	public String toString() {
+		return "GugunDto [gugunCode=" + gugunCode + ", gugunName=" + gugunName + "]";
 	}
 
 }

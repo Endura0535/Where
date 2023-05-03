@@ -1,16 +1,15 @@
 package com.ssafy.enjoytrip.model.dto;
 
 public class AttractionDto {
-	private String contentId;
+	private int contentId;
 	private String title;
 	private String imgPath;
 	private String address1;
 	private String address2;
 	private double latitude;
 	private double longitude;
-	private int count;
 
-	public AttractionDto(String contentId, String title, String imgPath, String address1, String address2,
+	public AttractionDto(int contentId, String title, String imgPath, String address1, String address2,
 			double latitude, double longitude) {
 		super();
 		this.contentId = contentId;
@@ -23,7 +22,7 @@ public class AttractionDto {
 	}
 	
 
-	public AttractionDto(String contentId, String title, String imgPath, String address1, String address2,
+	public AttractionDto(int contentId, String title, String imgPath, String address1, String address2,
 			double latitude, double longitude, int count) {
 		super();
 		this.contentId = contentId;
@@ -33,18 +32,17 @@ public class AttractionDto {
 		this.address2 = address2;
 		this.latitude = latitude;
 		this.longitude = longitude;
-		this.count = count;
 	}
 
 	public AttractionDto() {
 		super();
 	}
 
-	public String getContentId() {
+	public int getContentId() {
 		return contentId;
 	}
 
-	public void setContentId(String contentId) {
+	public void setContentId(int contentId) {
 		this.contentId = contentId;
 	}
 
@@ -96,16 +94,6 @@ public class AttractionDto {
 		this.longitude = longitude;
 	}
 	
-
-	public int getCount() {
-		return count;
-	}
-
-
-	public void setCount(int count) {
-		this.count = count;
-	}
-
 
 	@Override
 	public String toString() {

@@ -14,18 +14,15 @@ import com.ssafy.enjoytrip.model.dto.Board;
 import com.ssafy.enjoytrip.util.PageNavigation;
 import com.ssafy.enjoytrip.util.SizeConstant;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Service
 public class BoardServiceImpl implements BoardService {
 
 	private Logger logger = LoggerFactory.getLogger(UserController.class);
 
-	private BoardDao boardDao;
-
-	public BoardServiceImpl(BoardDao boardDao) {
-		super();
-		this.boardDao = boardDao;
-		System.out.println("BoardServiceImp........................dao:" + boardDao);
-	}
+	private final BoardDao boardDao;
 
 	@Override
 	public void writeArticle(Board boardDto) throws Exception {

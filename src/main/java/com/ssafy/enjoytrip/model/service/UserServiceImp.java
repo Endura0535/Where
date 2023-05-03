@@ -3,20 +3,18 @@ package com.ssafy.enjoytrip.model.service;
 import java.sql.SQLException;
 
 import org.mindrot.jbcrypt.BCrypt;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.enjoytrip.controller.UserController;
 import com.ssafy.enjoytrip.model.dao.UserDao;
 import com.ssafy.enjoytrip.model.dto.BookException;
 import com.ssafy.enjoytrip.model.dto.User;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class UserServiceImp implements UserService {
-	
-	private Logger logger = LoggerFactory.getLogger(UserController.class);
-	
+		
 	private UserDao dao;
 	public UserServiceImp(UserDao dao) {
 		super();
@@ -28,7 +26,7 @@ public class UserServiceImp implements UserService {
 		System.out.println(id + "    " + pw);
 		try {
 			User user = dao.search(id);
-			System.out.println(user);
+			log.debug("로그인.................................");
 
 			if (user == null) {
 				System.out.println("user null");
@@ -72,7 +70,7 @@ public class UserServiceImp implements UserService {
 	public void update(User user) {
 		try {
 			user.setPass(BCrypt.hashpw(user.getPass(), BCrypt.gensalt()));
-			logger.debug(user.toString());
+			log.debug(user.toString());
 			dao.update(user);
 		} catch (Exception e) {
 			e.printStackTrace();
