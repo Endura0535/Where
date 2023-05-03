@@ -80,9 +80,9 @@ public class UserController {
 		User user = (User)session.getAttribute("userInfo");
 		logger.debug(user.toString());
 		
-		String modiAtt = modiUser.getpass();
+		String modiAtt = modiUser.getPass();
 		if(modiAtt != null && modiAtt != "")
-			user.setpass(modiAtt);
+			user.setPass(modiAtt);
 		
 		modiAtt = modiUser.getEmail();
 		if(modiAtt != null && modiAtt != "")

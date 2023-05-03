@@ -17,7 +17,7 @@
 				role="button" data-bs-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false">커뮤니티</a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item " href="${root}/article?action=list">게시판</a> <a
+					<a class="dropdown-item " href="${root}/article/list">게시판</a> <a
 						class="dropdown-item " href="${root}/trip?type=hotPlace">Hot Place</a>
 				</div></li>
 		</ul>

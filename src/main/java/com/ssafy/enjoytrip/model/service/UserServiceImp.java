@@ -36,7 +36,7 @@ public class UserServiceImp implements UserService {
 			}
 				
 
-			if (!BCrypt.checkpw(pw, user.getpass()))
+			if (!BCrypt.checkpw(pw, user.getPass()))
 				throw new BookException("비밀 번호 오류 발생!!!!");
 
 			return user;
@@ -59,8 +59,8 @@ public class UserServiceImp implements UserService {
 			if (find != null) {
 				throw new BookException("이미 등록된 아이디 입니다.");
 			}
-			user.setpass(BCrypt.hashpw(user.getpass(), BCrypt.gensalt()));
-			System.out.println(user.getpass());
+			user.setPass(BCrypt.hashpw(user.getPass(), BCrypt.gensalt()));
+			System.out.println(user.getPass());
 			dao.regist(user);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -71,7 +71,7 @@ public class UserServiceImp implements UserService {
 	@Override
 	public void update(User user) {
 		try {
-			user.setpass(BCrypt.hashpw(user.getpass(), BCrypt.gensalt()));
+			user.setPass(BCrypt.hashpw(user.getPass(), BCrypt.gensalt()));
 			logger.debug(user.toString());
 			dao.update(user);
 		} catch (Exception e) {
