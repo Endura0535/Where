@@ -44,7 +44,7 @@
 				onsubmit="return false;" role="search">
 				<select id="search-area" class="form-select me-2 w-100">
 					<option value="0" selected>검색 할 지역 선택</option>
-					<c:forEach items="${areaList}" var="attraction">
+					<c:forEach items="${attractions}" var="attraction">
 						<option value="${attraction.areaCode}">${attraction.areaName}</option>
 					</c:forEach>
 				</select> <select id="search-gugun" class="form-select me-2 w-100">

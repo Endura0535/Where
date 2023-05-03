@@ -20,8 +20,6 @@ public interface TripDao {
 	
 	DetailDto getDetailInfo(int contentId) throws SQLException;
 	
-	HotPlaceDto getHotPlace(int contentId) throws SQLException;
-
 	List<HotPlaceDto> getAllHotPlace() throws SQLException;
 	
 	void insertHotPlace(HotPlaceDto hotplaceDto) throws SQLException;
