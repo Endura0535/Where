@@ -59,6 +59,12 @@ public class BoardController extends HttpServlet {
 		model.addAttribute("articles", articles);
 		return "board/InfoBoard";
 	}
+	
+	@GetMapping("/write")
+	public void write(HttpSession session) {
+		log.debug("board................... write 화면으로 이동");
+	} 
+	
 //	private String listArticle(PageBean bean, HttpServletRequest request, HttpServletResponse response) {
 //		HttpSession session = request.getSession();
 //		User user = (User) session.getAttribute("userInfo");

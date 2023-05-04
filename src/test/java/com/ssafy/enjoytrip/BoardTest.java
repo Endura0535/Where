@@ -43,7 +43,7 @@ class BoardTest {
 	@Test
 	public void insertTest() throws Exception {
 		Board board = new Board();
-		board.setUserId("ssafy2");
+		board.setId("ssafy2");
 		board.setSubject("sub");
 		board.setContent("con");
 		assertNotNull(board);

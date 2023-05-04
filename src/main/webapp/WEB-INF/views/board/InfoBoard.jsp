@@ -81,7 +81,7 @@ window.onload=function(){
 				<div
 					class="d-flex flex-column justify-content-end align-content-center p-2 m-auto">
 					<div>
-						<form class="d-flex" id="form-sort" action="${root}/article/list"
+						<form class="d-flex" id="frm" action="${root}/article/list"
 							style="width: 300px; float: left">
 							<input type="hidden" name='pageNo' id='pageNo' /> <select
 								name="key" id="key"
@@ -121,7 +121,7 @@ window.onload=function(){
 									<td class="text-start"><a href="#"
 										class="article-title link-dark" data-no="${article.articleNo}"
 										style="text-decoration: none"> ${article.subject} </a></td>
-									<td>${article.userId}</td>
+									<td>${article.id}</td>
 									<td>${article.registerTime}</td>
 									<td>${article.hit}</td>
 

@@ -18,7 +18,7 @@ public class PageUtility {
     int totalrowcount=0;				//총 row 개수
     int totalpagecount=0;				//총 페이지 수
     int displayrowcount=0;				//한 페이지당 보여줄 개수
-    int pagePercount = 2;				//페이지 링크 거는 개수      << < 1 2 3 4 5 > >>
+    int pagePercount = 5;				//페이지 링크 거는 개수      << < 1 2 3 4 5 > >>
     String imagepath;
     String search;
     /**
