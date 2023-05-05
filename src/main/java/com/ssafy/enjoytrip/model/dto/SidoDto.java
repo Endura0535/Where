@@ -5,26 +5,26 @@ public class SidoDto {
 	private int sidoCode;
 	private String sidoName;
 
-	public int getAreaCode() {
+	public int getSidoCode() {
 		return sidoCode;
 	}
 
-	public void setAreaCode(int areaCode) {
-		this.sidoCode = areaCode;
+	public void setSidoCode(int sidoCode) {
+		this.sidoCode = sidoCode;
 	}
 
-	public String getAreaName() {
+	public String getSidoName() {
 		return sidoName;
 	}
 
-	public void setAreaName(String areaName) {
-		this.sidoName = areaName;
+	public void setSidoName(String sidoName) {
+		this.sidoName = sidoName;
 	}
 
-	public SidoDto(int areaCode, String areaName) {
+	public SidoDto(int sidoCode, String sidoName) {
 		super();
-		this.sidoCode = areaCode;
-		this.sidoName = areaName;
+		this.sidoCode = sidoCode;
+		this.sidoName = sidoName;
 	}
 
 	@Override

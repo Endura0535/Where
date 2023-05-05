@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ssafy.enjoytrip.model.dto.AreaCodeDto;
 import com.ssafy.enjoytrip.model.dto.AttractionDto;
 import com.ssafy.enjoytrip.model.dto.DetailDto;
 import com.ssafy.enjoytrip.model.dto.GugunDto;
 import com.ssafy.enjoytrip.model.dto.HotPlaceDto;
+import com.ssafy.enjoytrip.model.dto.SidoDto;
 import com.ssafy.enjoytrip.model.service.TripService;
 
 @Controller
@@ -34,8 +36,30 @@ private static final long serialVersionUID = 1L;
 	private static final Logger logger = LoggerFactory.getLogger(TripController.class);
 	
 	@GetMapping("/attr")
-	public String TripList() {
+	public String trip(Model model) {
+		List<SidoDto> sido = tripService.getSidoList();
+		model.addAttribute("sido", sido);
 		return "trip/recommendByLocation";
+	}
+	
+	@GetMapping("/attrs")
+	public ResponseEntity<?> tripList(@RequestParam int sidoCode,@RequestParam int gugunCode,@RequestParam int contentTypeId, Model model) {
+		AreaCodeDto areaCode = new AreaCodeDto(sidoCode, gugunCode, contentTypeId);
+		logger.debug("areaCode..........................areaCode:{}",areaCode);
+		List<AttractionDto> attrList = tripService.getAttractionList(areaCode);
+		model.addAttribute("attrList",attrList);
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("attrList", attrList);
+		
+		logger.debug("result.............result:{}",result);
+
+		if (attrList != null && !attrList.isEmpty()) {
+			return new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}
+		
 	}
 	
 	@GetMapping("/attr/{sidoCode}")
@@ -43,7 +67,7 @@ private static final long serialVersionUID = 1L;
 		logger.debug("sidoCode.............................sidoCode:{}", sidoCode);
 		List<GugunDto> gugunList = tripService.getGugunList(sidoCode);
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("gugunList", result);
+		result.put("gugunList", gugunList);
 
 		if (gugunList != null && !gugunList.isEmpty()) {
 			return new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);

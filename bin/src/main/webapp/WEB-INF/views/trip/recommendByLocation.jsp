@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="./common/header.jsp"%>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <body>
-	<%@ include file="./common/SignIn.jsp"%>
-	<%@ include file="./common/nav.jsp"%>
+	<%@ include file="/WEB-INF/views/common/SignIn.jsp"%>
+	<%@ include file="/WEB-INF/views/common/nav.jsp"%>
 
 
 	<diV id="main">
@@ -44,7 +44,7 @@
 				onsubmit="return false;" role="search">
 				<select id="search-area" class="form-select me-2 w-100">
 					<option value="0" selected>검색 할 지역 선택</option>
-					<c:forEach items="${areaList}" var="attraction">
+					<c:forEach items="${attractions}" var="attraction">
 						<option value="${attraction.areaCode}">${attraction.areaName}</option>
 					</c:forEach>
 				</select> <select id="search-gugun" class="form-select me-2 w-100">
@@ -93,9 +93,9 @@
  
 document.getElementById("search-area").addEventListener("change", () =>{
 	
-	let searchUrl = "http://localhost:8080${root}/trip?type=gugun";
+	let searchUrl = "http://localhost${root}/trip/attr";
 	let sidoCode = document.getElementById("search-area").value;
-	searchUrl += "&sidoCode=" + sidoCode;
+	searchUrl += sidoCode;
 	
 	fetch(searchUrl)
          .then((response) => response.json())
@@ -268,7 +268,7 @@ document.getElementById("search-area").addEventListener("change", () =>{
 		</main>
 		<!-- End #main -->
 
-		<%@ include file="./common/footer.jsp"%>
+		<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 
 </html>

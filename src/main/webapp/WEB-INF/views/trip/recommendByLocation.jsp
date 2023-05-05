@@ -44,8 +44,8 @@
 				onsubmit="return false;" role="search">
 				<select id="search-area" class="form-select me-2 w-100">
 					<option value="0" selected>검색 할 지역 선택</option>
-					<c:forEach items="${attractions}" var="attraction">
-						<option value="${attraction.areaCode}">${attraction.areaName}</option>
+					<c:forEach items="${sido}" var="sido">
+						<option value="${sido.sidoCode}">${sido.sidoName}</option>
 					</c:forEach>
 				</select> <select id="search-gugun" class="form-select me-2 w-100">
 					<option value="0" selected>검색 할 지역 선택</option>
@@ -93,7 +93,7 @@
  
 document.getElementById("search-area").addEventListener("change", () =>{
 	
-	let searchUrl = "http://localhost${root}/trip/attr";
+	let searchUrl = "http://localhost${root}/trip/attr/";
 	let sidoCode = document.getElementById("search-area").value;
 	searchUrl += sidoCode;
 	
@@ -114,13 +114,13 @@ document.getElementById("search-area").addEventListener("change", () =>{
       // 위 데이터를 가지고 공공데이터에 요청.
       // 받은 데이터를 이용하여 화면 구성.
     document.getElementById("btn-search").addEventListener("click", () => {
-      let searchUrl = `http://localhost:8080${root}/trip?type=search`;
+      let searchUrl = `http:${root}/trip/attrs?`;
 
-      let areaCode = document.getElementById("search-area").value;
+      let sidoCode = document.getElementById("search-area").value;
       let gugunCode = document.getElementById("search-gugun").value;
       let contentTypeId = document.getElementById("search-content-id").value;
 
-      if (parseInt(areaCode)) searchUrl += "&areaCode=" + areaCode;
+      if (parseInt(sidoCode)) searchUrl += "&sidoCode=" + sidoCode;
       if (parseInt(gugunCode)) searchUrl += "&gugunCode=" + gugunCode;
       if (parseInt(contentTypeId)) searchUrl += "&contentTypeId=" + contentTypeId;
 
@@ -151,14 +151,14 @@ document.getElementById("search-area").addEventListener("change", () =>{
 	var map = new kakao.maps.Map(mapContainer, mapOption);
 
     function makeList(data) {
-
+	  console.log(data);
       document.querySelector("table").setAttribute("style", "display: ;");
 
       let tripList = ``;
       var userInfo = '<%=(Object)session.getAttribute("userInfo")%>';
 
       positions = [];
-          data.forEach((item) => {
+          data.attrList.forEach((item) => {
           	tripList += 
           		"<tr onclick=" + "\"moveCenter(" + item.latitude + "," + item.longitude + ")\">" +
           			"<td><img src=\"" + item.imgPath  + "\" width=\"100px\" \"></td>" +

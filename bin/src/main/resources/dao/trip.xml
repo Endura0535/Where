@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace='com.ssafy.enjoytrip.model.dao.TripDao'>
+
+	<resultMap id="attractionResultMap" type="AttractionDto">
+  <result property="contentId" column="content_id" />
+  <result property="address1" column="addr1"/>
+  <result property="address2" column="addr2"/>
+  <result property="title" column="title"/>
+  <result property="imgPath" column="first_image"/>
+  <result property="latitude" column="latitude"/>
+  <result property="longitude" column="longitude"/>
+	</resultMap>
+	
+	<resultMap id="DetailDtoMap" type="DetailDto">
+  <result property="address1" column="addr1"/>
+  <result property="address2" column="addr2"/>
+  <result property="title" column="title"/>
+  <result property="overview" column="overview"/>
+  <result property="imgPath" column="first_image"/>
+  <result property="zipCode" column="zipCode"/>
+  <result property="telNumber" column="tel"/>
+	</resultMap>
+
+	<!-- id는 Dao의 메서드 이름과 동일해야 한다. -->
+
+	<select id="getAttractionList" parameterType="AreaCodeDto" resultMap = "attractionResultMap">
+		select *
+		from attraction_info
+		where sido_code = #{sidoCode}
+		and gugun_code = #{gugunCode}
+		and content_type_id = #{contentTypeId}
+	</select>
+
+	<select id="getGugunList" parameterType="int" resultType="GugunDto">
+		select gugun_code as gugunCode, gugun_name as gugunName
+		from gugun
+		where sido_code = #{sidoCode}
+	</select>
+	
+	<select id = "getSidoList" resultType="SidoDto">
+		select sido_code as sidoCode, sido_name as sidoName
+		from sido
+	</select>
+	
+	<select id="getDetailInfo" parameterType="int" resultMap="DetailDtoMap">
+		select title, addr1 , addr2 , first_image , overview , zipcode , tel
+		from attraction_info ai , attraction_description ad
+		where ai.content_id = #{contentId} and ai.content_id = ad.content_id
+	</select>
+	
+	<select id="getHotPlace" parameterType="int" resultType="HotPlaceDto">
+		select distinct * from hotplace 
+		where content_id = #{contentId}
+	</select>
+	
+	<select id="getAllHotPlace" resultType="HotPlaceDto">
+		select *, count(*) as count 
+		from hotplace 
+		group by content_id
+	</select>
+	
+	<insert id="insertHotPlace" parameterType="HotPlaceDto">
+		insert into hotplace values (#{contentId},#{uid})
+	</insert>
+
+</mapper>

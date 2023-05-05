@@ -116,11 +116,11 @@ document.getElementById("search-area").addEventListener("change", () =>{
     document.getElementById("btn-search").addEventListener("click", () => {
       let searchUrl = `http://localhost:8080${root}/trip?type=search`;
 
-      let areaCode = document.getElementById("search-area").value;
+      let sidoCode = document.getElementById("search-area").value;
       let gugunCode = document.getElementById("search-gugun").value;
       let contentTypeId = document.getElementById("search-content-id").value;
 
-      if (parseInt(areaCode)) searchUrl += "&areaCode=" + areaCode;
+      if (parseInt(sidoCode)) searchUrl += "&sidoCode=" + sidoCode;
       if (parseInt(gugunCode)) searchUrl += "&gugunCode=" + gugunCode;
       if (parseInt(contentTypeId)) searchUrl += "&contentTypeId=" + contentTypeId;
 
@@ -203,7 +203,7 @@ document.getElementById("search-area").addEventListener("change", () =>{
 				this.setImage(clickMarkerImage);
 				selectedMarker = this;
 				
-				let searchUrl = "http://localhost:8080${root}/trip?type=detail&contentId=" + curContentId;
+				let searchUrl = "http://localhost:8080${root}/trip/attr" + curContentId;
 				
 				var iwContent = "<div class=\"d-flex flex-column justify-content-center\" style=\"padding:5px; width:500px; height:150px; \">", // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 				   iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
