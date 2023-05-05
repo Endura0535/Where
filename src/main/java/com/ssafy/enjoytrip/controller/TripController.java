@@ -76,14 +76,18 @@ private static final long serialVersionUID = 1L;
 		}
 	}
 	
-	@GetMapping("/detail/{contentId}")
-	public ResponseEntity<?> getDetail(@PathVariable int contentId) {
+	@GetMapping("/detail")
+	public ResponseEntity<?> getDetail(@RequestParam int contentId) {
 		logger.debug("contentId.............................contentId:{}", contentId);
 		DetailDto detailDto = tripService.getDetailInfo(contentId);
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("detailDto", detailDto);
+
 		if (detailDto != null) {
-			return new ResponseEntity<DetailDto>(detailDto, HttpStatus.OK);
+			return new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<DetailDto>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+
 		}
 	}
 	

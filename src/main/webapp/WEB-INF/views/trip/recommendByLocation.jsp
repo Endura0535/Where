@@ -203,28 +203,31 @@ document.getElementById("search-area").addEventListener("change", () =>{
 				this.setImage(clickMarkerImage);
 				selectedMarker = this;
 				
-				let searchUrl = "http://localhost:8080${root}/trip?type=detail&contentId=" + curContentId;
+				let searchUrl = `http:${root}/trip/detail?contentId=` + curContentId;
+				console.log(searchUrl)
 				
 				var iwContent = "<div class=\"d-flex flex-column justify-content-center\" style=\"padding:5px; width:500px; height:150px; \">", // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 				   iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 				
-				fetch(searchUrl,{
-					  headers: {
-						    Accept: "application / json",
-						  },
-						  method: "GET",
-						})
+				fetch(searchUrl
+						//,{
+					  //headers: {
+						//    Accept: "application/json",
+						  //},
+						  //method: "GET",
+						//}
+				)
 		        .then((response) => response.json())
 		        .then(data => {
+		        	console.log(data);
 		        	let html = "";
-		        	
-		        	html += "<h3 style=\"text-align: left;\">" + data.title +"</h3>";
+		        	html += "<h3 style=\"text-align: left;\">" + data.detailDto.title +"</h3>";
 		        	html += "<div style=\"display: flex; align-content: center;  margin-bottom:5px; \">"
-			        html += "<img src=\"" + data.imagePath + "\" width=30%; height=100%; \">";
+			        html += "<img src=\"" + data.detailDto.imgPath + "\" width=30%; height=100%; \">";
 			        html += "<div class=\"d-flex flex-column justify-content-center \" style=\"margin-left: 10px;\">";
-		        	html += "<div style=\"text-align: left; font-size: 15px\">" + "주소 : " + data.address1 + " " + data.address2 + "</div>";
-		        	html += "<div style=\"text-align: left; font-size: 15px\">" + "우편 번호 : " + data.zipCode + "</div>";
-		        	html += "<div style=\"text-align: left; font-size: 15px\">" + "전화번호 : " + data.telNumber +  "</div>";
+		        	html += "<div style=\"text-align: left; font-size: 15px\">" + "주소 : " + data.detailDto.address1 + " " + data.detailDto.address2 + "</div>";
+		        	html += "<div style=\"text-align: left; font-size: 15px\">" + "우편 번호 : " + data.detailDto.zipCode + "</div>";
+		        	html += "<div style=\"text-align: left; font-size: 15px\">" + "전화번호 : " + data.detailDto.telNumber +  "</div>";
 		        	html+= "</div>";
 		        	html+= "</div>";
 		        	
