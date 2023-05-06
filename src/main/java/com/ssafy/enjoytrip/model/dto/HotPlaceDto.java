@@ -29,11 +29,16 @@ public class HotPlaceDto {
 		this.likes = likes;
 	}
 	
-	public HotPlaceDto(int contentId, String uid, int likes) {
+	public HotPlaceDto(int contentId, int likes) {
+		super();
+		this.contentId = contentId;
+		this.likes = likes;
+	}
+	
+	public HotPlaceDto(int contentId, String uid) {
 		super();
 		this.contentId = contentId;
 		this.uid = uid;
-		this.likes = likes;
 	}
 
 	@Override

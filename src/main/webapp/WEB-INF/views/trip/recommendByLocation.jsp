@@ -155,8 +155,7 @@ document.getElementById("search-area").addEventListener("change", () =>{
       document.querySelector("table").setAttribute("style", "display: ;");
 
       let tripList = ``;
-      var userInfo = '<%=(Object)session.getAttribute("userInfo")%>';
-
+      var userInfo = `${userInfo}`;
       positions = [];
           data.attrList.forEach((item) => {
           	tripList += 
@@ -256,9 +255,20 @@ document.getElementById("search-area").addEventListener("change", () =>{
       }
       
       function increaseLikeCount(id){
-    	  console.log(id)
-    	  url = "${root}/trip?type=hotRegi&id="+id;
-    	  fetch(url)
+    	  console.log(id);
+    	  url = "${root}/trip/hotplace";
+    	  fetch(url,{
+    		  method: "POST",
+    		  headers:{
+    			  "Content-Type": `application/json`
+    		  },
+    		  body: JSON.stringify({
+    			  contentId: id,
+    			  uid: `${userInfo.id}`,
+    			  count: 0,
+    		  }),
+    	  })
+    	  
       }
       
 

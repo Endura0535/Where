@@ -58,7 +58,7 @@
 	</select>
 	
 	<select id="getAllHotPlace" resultType="HotPlaceDto">
-		select *, count(*) as count 
+		select content_id, count(*) as count 
 		from hotplace 
 		group by content_id
 	</select>

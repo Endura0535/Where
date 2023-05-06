@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -92,18 +93,13 @@ private static final long serialVersionUID = 1L;
 	}
 	
 	@GetMapping("/hotplace")
-	private ResponseEntity<?> getAllHotPlace() {
+	private String getAllHotPlace(Model model) {
 		List<HotPlaceDto> hotplaces = tripService.getAllHotPlace();
 		logger.debug("hotplaces.searchAll.............................hotplaces:{}", hotplaces);
 
-		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("hotplaces", hotplaces);
+		model.addAttribute("hotplaces", hotplaces);
 
-		if (hotplaces != null && !hotplaces.isEmpty()) {
-			return new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-		}
+		return "trip/HotPlace";
 	}
 	
 	@GetMapping("/hotplace/{contentId}")
@@ -119,7 +115,7 @@ private static final long serialVersionUID = 1L;
 	}
 	
 	@PostMapping("/hotplace")
-	private ResponseEntity<?> hotRegi(HotPlaceDto hotplaceDto) {
+	private ResponseEntity<?> hotRegi(@RequestBody HotPlaceDto hotplaceDto) {
 		tripService.hotRegi(hotplaceDto);
 		logger.debug("hotplaceDto.insert.............................hotplaceDto:{}", hotplaceDto);
 		

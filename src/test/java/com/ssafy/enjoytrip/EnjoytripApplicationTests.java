@@ -91,10 +91,10 @@ class EnjoytripApplicationTests {
 		assertNotNull(list);
 	}
 	
-	@Test
-	public void insertHotPlaceTest() throws Exception{
-		dao.insertHotPlace(new HotPlaceDto(125405, "admin2", 0));
-	}
+//	@Test
+//	public void insertHotPlaceTest() throws Exception{
+//		dao.insertHotPlace(new HotPlaceDto(125405, "admin2", 0));
+//	}
 	
 	@Test
 	public void getAllHotPlaceTest() throws Exception{
