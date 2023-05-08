@@ -9,7 +9,7 @@
 		<ul
 			class="navbar-nav me-5 ms-5 d-flex w-75 align-items-center justify-content-center ">
 			<li class="nav-item dropdown ms-5 me-5"><a class="nav-link"
-				href="${root}/trip/recommendByLocation" aria-haspopup="true"
+				href="${root}/trip/attr" aria-haspopup="true"
 				aria-expanded="false">지역별 여행지 추천</a></li>
 
 			<li class="nav-item dropdown me-5 ms-5"><a
@@ -18,7 +18,7 @@
 				aria-expanded="false">커뮤니티</a>
 				<div class="dropdown-menu">
 					<a class="dropdown-item " href="${root}/article/list">게시판</a> <a
-						class="dropdown-item " href="${root}/trip?type=hotPlace">Hot Place</a>
+						class="dropdown-item " href="${root}/trip/hotplace">Hot Place</a>
 				</div></li>
 		</ul>
 
