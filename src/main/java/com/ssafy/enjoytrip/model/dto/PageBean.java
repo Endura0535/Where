@@ -4,34 +4,42 @@ import java.io.Serializable;
 
 import io.swagger.annotations.ApiParam;
 
-/** UI 화면 페이지에 대한 정보를 표시하는 클래스  */
-public class PageBean implements Serializable{
-	/**검색 조건*/
-	@ApiParam(value="검색 조건")
+/** UI 화면 페이지에 대한 정보를 표시하는 클래스 */
+public class PageBean implements Serializable {
+	/** 검색 조건 */
+	@ApiParam(value = "검색 조건")
 	private String key;
-	/**검색 단어*/
-	@ApiParam(value="검색어")
+	/** 검색 단어 */
+	@ApiParam(value = "검색어")
 	private String word;
-	/**페이징 처리에 대한 link정보*/
+	/** 페이징 처리에 대한 link정보 */
 	private String pageLink;
-	/**현재 페이지 번호*/
-	@ApiParam(value="현재 페이지", required = true)
+
+	private String sortKey;
+
+	/** 현재 페이지 번호 */
+	@ApiParam(value = "현재 페이지", required = true)
 	private int pageNo;
-	/**한 페이지에 보여주 content 개수*/
+	/** 한 페이지에 보여줄 content 개수 */
 	private int interval = 5;
-	/**페이지 시작 번호*/
-	private int start=0;
-	public PageBean() {	}
+	/** 페이지 시작 번호 */
+	private int start = 0;
+
+	public PageBean() {
+	}
+
 	public PageBean(String key, String word, int pageNo) {
 		setKey(key);
 		setWord(word);
 		setPageNo(pageNo);
 	}
+
 	public PageBean(String key, String word, String pageNo) {
 		setKey(key);
 		setWord(word);
 		setPageNo(pageNo);
 	}
+
 	private void setPageNo(String pageNo) {
 		try {
 			this.pageNo = Integer.parseInt(pageNo);
@@ -39,72 +47,81 @@ public class PageBean implements Serializable{
 			this.pageNo = 1;
 		}
 	}
+
 	public String getKey() {
 		return key;
 	}
+
 	public String getKey(String k) {
-		if(key!=null && key.equals(k)) {
+		if (key != null && key.equals(k)) {
 			return "selected='selected'";
-		}else {
+		} else {
 			return "";
 		}
 	}
+
 	public void setKey(String key) {
 		this.key = key;
 	}
+
 	public String getWord() {
 		return word;
 	}
+
 	public void setWord(String word) {
 		this.word = word;
 	}
-	
+
+	public String getSortKey() {
+		return sortKey;
+	}
+
+	public void setSortKey(String sortKey) {
+		this.sortKey = sortKey;
+	}
+
 	public String getPageLink() {
 		return pageLink;
 	}
+
 	public void setPageLink(String pageLink) {
 		this.pageLink = pageLink;
 	}
+
 	public int getPageNo() {
 		return pageNo;
 	}
+
 	public void setPageNo(int pageNo) {
 		this.pageNo = pageNo;
 	}
+
 	public int getInterval() {
 		return interval;
 	}
+
 	public void setInterval(int interval) {
 		this.interval = interval;
 	}
+
 	public int getStart() {
-		if(pageNo>1) {
-			return start = (pageNo-1)*interval;
-		}else {
+		if (pageNo > 1) {
+			return start = (pageNo - 1) * interval;
+		} else {
 			return 0;
 		}
 	}
+
 	public void setStart(int start) {
 		this.start = start;
 	}
+
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("PageBean [key=").append(key).append(", word=").append(word).append(", pagelink=")
-				.append(pageLink).append(", pageNo=").append(pageNo).append(", interval=").append(interval)
-				.append(", start=").append(start).append("]");
-		return builder.toString();
+		return "PageBean [key=" + key + ", word=" + word + ", pageLink=" + pageLink + ", sortKey=" + sortKey
+				+ ", pageNo=" + pageNo + ", interval=" + interval + ", start=" + start + "]";
 	}
+	
+	
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
