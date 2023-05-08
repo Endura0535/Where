@@ -26,8 +26,11 @@ window.onload=function(){
 	      document.querySelector("#pageNo").value='1';
 	    </c:otherwise>
 	  </c:choose>
-	  <c:if test='${!empty param.key}'>
+/* 	  <c:if test='${!empty param.key}'>
 	    document.querySelector("#key").value='${param.key}';
+	  </c:if> */
+	  <c:if test='${!empty param.sortKey}'>
+	    document.querySelector("#sortKey").value='${param.sortKey}';
 	  </c:if>
 	  let pages = document.querySelectorAll(".page-link");
 	  pages.forEach(function (page) {
@@ -72,30 +75,32 @@ window.onload=function(){
 		<!-- ======= Blog Single ======= -->
 		<section class="news-single nav-arrow-b">
 			<div class="container">
-
-				<div
-					class="d-flex justify-content-end align-content-center p-2 m-auto">
-					<button id="btn-write" type="button" class="btn btn-secondary">작성하기</button>
+				<div>
+					<form class="d-flex" id="frm" action="${root}/article/list"
+						style="width: 300px; float: left; margin-top: 1.5em;">
+						<input type="hidden" name='pageNo' id='pageNo' /> <select
+							name="sortKey" id="sortKey"
+							class="form-select form-select-sm ms-5 me-1 w-50"
+							aria-label="조회조건">
+							<option value="articleNo" selected>글번호</option>
+							<option value="hit">조회수</option>
+							<option value="subject">제목순</option>
+						</select>
+						<div class="input-group input-group-sm">
+							<button id="btn-sort" class="btn btn-dark" type="submit">조회</button>
+						</div>
+					</form>
 				</div>
-
+				<form class="form-a" action="${root}/article/write">
+					<div
+						class="d-flex justify-content-end align-content-center p-2 m-auto">
+						<button id="btn-write" type="submit"
+							class="btn btn-b border border-2 rounded-4 text-light"
+							style="padding: 0.7rem 1rem">작성하기</button>
+					</div>
+				</form>
 				<div
 					class="d-flex flex-column justify-content-end align-content-center p-2 m-auto">
-					<div>
-						<form class="d-flex" id="frm" action="${root}/article/list"
-							style="width: 300px; float: left">
-							<input type="hidden" name='pageNo' id='pageNo' /> <select
-								name="key" id="key"
-								class="form-select form-select-sm ms-5 me-1 w-50"
-								aria-label="조회조건">
-								<option value="article_no" selected>글번호</option>
-								<option value="view_count">조회수</option>
-								<option value="subject">제목순</option>
-							</select>
-							<div class="input-group input-group-sm">
-								<button id="btn-sort" class="btn btn-dark" type="button">조회</button>
-							</div>
-						</form>
-					</div>
 					<table class="table table-hover table-group-divider border-1">
 						<%--             <colgroup>
               <col width="5%">
@@ -118,7 +123,7 @@ window.onload=function(){
 							<c:forEach var="article" items="${articles}">
 								<tr class="text-center">
 									<th scope="row">${article.articleNo}</th>
-									<td class="text-start"><a href="#"
+									<td><a href="${root}/article/detail"
 										class="article-title link-dark" data-no="${article.articleNo}"
 										style="text-decoration: none"> ${article.subject} </a></td>
 									<td>${article.id}</td>
@@ -134,71 +139,6 @@ window.onload=function(){
 					<div class="col">${pageBean.pageLink}</div>
 				</div>
 			</div>
-			<!-- 			<form id="form-param" method="get" action="">
-				<input type="hidden" id="p-action" name="action" value=""> <input
-					type="hidden" id="p-pgno" name="pgno" value=""> <input
-					type="hidden" id="p-key" name="key" value=""> <input
-					type="hidden" id="p-word" name="word" value="">
-			</form>
-			<script>
-				let titles = document.querySelectorAll(".article-title");
-				titles
-						.forEach(function(title) {
-							title
-									.addEventListener(
-											"click",
-											function() {
-												console
-														.log(this
-																.getAttribute("data-no"));
-												location.href = "${root}/article?action=view&articleno="
-														+ this
-																.getAttribute("data-no");
-											});
-						});
-
-				document.querySelector("#btn-write").addEventListener("click",
-						function() {
-							location.href = "${root}/article?action=mvwrite";
-						});
-
-				document.querySelector("#btn-sort").addEventListener("click",
-						function() {
-							console.log("sort called");
-							let form = document.querySelector("#form-sort");
-							form.setAttribute("action", "${root}/article");
-							form.submit();
-						});
-
-				document.querySelector("#btn-write").addEventListener("click",
-						function() {
-							location.href = "${root}/article?action=mvwrite";
-						});
-
-				let pages = document.querySelectorAll(".page-link");
-				pages
-						.forEach(function(page) {
-							page
-									.addEventListener(
-											"click",
-											function() {
-												console
-														.log(this.parentNode
-																.getAttribute("data-pg"));
-												document
-														.querySelector("#p-action").value = "list";
-												document
-														.querySelector("#p-pgno").value = this.parentNode
-														.getAttribute("data-pg");
-												document
-														.querySelector("#p-key").value = "${param.key}";
-												document
-														.querySelector("#p-word").value = "${param.word}";
-												document.querySelector(
-														"#form-param").submit();
-											});
-						});
-			</script> -->
 	</main>
 	<!-- End #main -->
 

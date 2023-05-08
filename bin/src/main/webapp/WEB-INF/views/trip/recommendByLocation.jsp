@@ -44,8 +44,8 @@
 				onsubmit="return false;" role="search">
 				<select id="search-area" class="form-select me-2 w-100">
 					<option value="0" selected>검색 할 지역 선택</option>
-					<c:forEach items="${attractions}" var="attraction">
-						<option value="${attraction.areaCode}">${attraction.areaName}</option>
+					<c:forEach items="${sido}" var="sido">
+						<option value="${sido.sidoCode}">${sido.sidoName}</option>
 					</c:forEach>
 				</select> <select id="search-gugun" class="form-select me-2 w-100">
 					<option value="0" selected>검색 할 지역 선택</option>
@@ -93,7 +93,7 @@
  
 document.getElementById("search-area").addEventListener("change", () =>{
 	
-	let searchUrl = "http://localhost${root}/trip/attr";
+	let searchUrl = "http://localhost${root}/trip/attr/";
 	let sidoCode = document.getElementById("search-area").value;
 	searchUrl += sidoCode;
 	
@@ -114,13 +114,13 @@ document.getElementById("search-area").addEventListener("change", () =>{
       // 위 데이터를 가지고 공공데이터에 요청.
       // 받은 데이터를 이용하여 화면 구성.
     document.getElementById("btn-search").addEventListener("click", () => {
-      let searchUrl = `http://localhost:8080${root}/trip?type=search`;
+      let searchUrl = `http:${root}/trip/attrs?`;
 
-      let areaCode = document.getElementById("search-area").value;
+      let sidoCode = document.getElementById("search-area").value;
       let gugunCode = document.getElementById("search-gugun").value;
       let contentTypeId = document.getElementById("search-content-id").value;
 
-      if (parseInt(areaCode)) searchUrl += "&areaCode=" + areaCode;
+      if (parseInt(sidoCode)) searchUrl += "&sidoCode=" + sidoCode;
       if (parseInt(gugunCode)) searchUrl += "&gugunCode=" + gugunCode;
       if (parseInt(contentTypeId)) searchUrl += "&contentTypeId=" + contentTypeId;
 
@@ -151,14 +151,13 @@ document.getElementById("search-area").addEventListener("change", () =>{
 	var map = new kakao.maps.Map(mapContainer, mapOption);
 
     function makeList(data) {
-
+	  console.log(data);
       document.querySelector("table").setAttribute("style", "display: ;");
 
       let tripList = ``;
-      var userInfo = '<%=(Object)session.getAttribute("userInfo")%>';
-
+      var userInfo = `${userInfo}`;
       positions = [];
-          data.forEach((item) => {
+          data.attrList.forEach((item) => {
           	tripList += 
           		"<tr onclick=" + "\"moveCenter(" + item.latitude + "," + item.longitude + ")\">" +
           			"<td><img src=\"" + item.imgPath  + "\" width=\"100px\" \"></td>" +
@@ -203,28 +202,31 @@ document.getElementById("search-area").addEventListener("change", () =>{
 				this.setImage(clickMarkerImage);
 				selectedMarker = this;
 				
-				let searchUrl = "http://localhost:8080${root}/trip?type=detail&contentId=" + curContentId;
+				let searchUrl = `http:${root}/trip/detail?contentId=` + curContentId;
+				console.log(searchUrl)
 				
 				var iwContent = "<div class=\"d-flex flex-column justify-content-center\" style=\"padding:5px; width:500px; height:150px; \">", // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 				   iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 				
-				fetch(searchUrl,{
-					  headers: {
-						    Accept: "application / json",
-						  },
-						  method: "GET",
-						})
+				fetch(searchUrl
+						//,{
+					  //headers: {
+						//    Accept: "application/json",
+						  //},
+						  //method: "GET",
+						//}
+				)
 		        .then((response) => response.json())
 		        .then(data => {
+		        	console.log(data);
 		        	let html = "";
-		        	
-		        	html += "<h3 style=\"text-align: left;\">" + data.title +"</h3>";
+		        	html += "<h3 style=\"text-align: left;\">" + data.detailDto.title +"</h3>";
 		        	html += "<div style=\"display: flex; align-content: center;  margin-bottom:5px; \">"
-			        html += "<img src=\"" + data.imagePath + "\" width=30%; height=100%; \">";
+			        html += "<img src=\"" + data.detailDto.imgPath + "\" width=30%; height=100%; \">";
 			        html += "<div class=\"d-flex flex-column justify-content-center \" style=\"margin-left: 10px;\">";
-		        	html += "<div style=\"text-align: left; font-size: 15px\">" + "주소 : " + data.address1 + " " + data.address2 + "</div>";
-		        	html += "<div style=\"text-align: left; font-size: 15px\">" + "우편 번호 : " + data.zipCode + "</div>";
-		        	html += "<div style=\"text-align: left; font-size: 15px\">" + "전화번호 : " + data.telNumber +  "</div>";
+		        	html += "<div style=\"text-align: left; font-size: 15px\">" + "주소 : " + data.detailDto.address1 + " " + data.detailDto.address2 + "</div>";
+		        	html += "<div style=\"text-align: left; font-size: 15px\">" + "우편 번호 : " + data.detailDto.zipCode + "</div>";
+		        	html += "<div style=\"text-align: left; font-size: 15px\">" + "전화번호 : " + data.detailDto.telNumber +  "</div>";
 		        	html+= "</div>";
 		        	html+= "</div>";
 		        	
@@ -253,9 +255,20 @@ document.getElementById("search-area").addEventListener("change", () =>{
       }
       
       function increaseLikeCount(id){
-    	  console.log(id)
-    	  url = "${root}/trip?type=hotRegi&id="+id;
-    	  fetch(url)
+    	  console.log(id);
+    	  url = "${root}/trip/hotplace";
+    	  fetch(url,{
+    		  method: "POST",
+    		  headers:{
+    			  "Content-Type": `application/json`
+    		  },
+    		  body: JSON.stringify({
+    			  contentId: id,
+    			  uid: `${userInfo.id}`,
+    			  count: 0,
+    		  }),
+    	  })
+    	  
       }
       
 

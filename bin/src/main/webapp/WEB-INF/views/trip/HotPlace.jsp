@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="./common/header.jsp"%>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <body>
-	<%@ include file="./common/SignIn.jsp"%>
-	<%@ include file="./common/nav.jsp"%>
+	<%@ include file="/WEB-INF/views/common/SignIn.jsp"%>
+	<%@ include file="/WEB-INF/views/common/nav.jsp"%>
 
 
 	<main id="main"> <!-- =======Intro Single ======= -->
@@ -39,7 +39,7 @@
 	<section class="agents-grid grid">
 		<div class="container">
 			<div class="row">
-				<c:forEach var="place" items="${places}">
+				<c:forEach var="place" items="${hotplaces}">
 					<div class="col-md-4">
 						<div class="card-box-d">
 							<div class="card-img-d">
@@ -108,6 +108,6 @@
 	<!-- End Agents Grid--> </main>
 	<!-- End #main -->
 
-	<%@ include file="./common/footer.jsp"%>
+	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>
