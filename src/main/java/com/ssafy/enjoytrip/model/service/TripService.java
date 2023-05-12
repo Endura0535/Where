@@ -20,7 +20,7 @@ public interface TripService {
 
 	DetailDto getDetailInfo(int contentId);
 	
-	public List<HotPlaceDto> getAllHotPlace();
+	public List<AttractionDto> getAllHotPlace();
 	
 	public DetailDto getHotPlace(int contentId);
 	

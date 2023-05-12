@@ -8,6 +8,7 @@ public class AttractionDto {
 	private String address2;
 	private double latitude;
 	private double longitude;
+	private int count;
 
 	public AttractionDto(int contentId, String title, String imgPath, String address1, String address2,
 			double latitude, double longitude) {
@@ -32,6 +33,7 @@ public class AttractionDto {
 		this.address2 = address2;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.count = count;
 	}
 
 	public AttractionDto() {
@@ -92,6 +94,14 @@ public class AttractionDto {
 
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
+	}
+	
+	public int getCount() {
+		return count;
+	}
+	
+	public void setCount(int count) {
+		this.count = count;
 	}
 	
 

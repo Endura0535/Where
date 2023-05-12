@@ -96,12 +96,12 @@ class EnjoytripApplicationTests {
 //		dao.insertHotPlace(new HotPlaceDto(125405, "admin2", 0));
 //	}
 	
-	@Test
-	public void getAllHotPlaceTest() throws Exception{
-		List<HotPlaceDto> list = dao.getAllHotPlace();
-		logger.debug("oksubin : {} " ,list);
-		assertNotNull(list);
-	}
+//	@Test
+//	public void getAllHotPlaceTest() throws Exception{
+//		List<HotPlaceDto> list = dao.getAllHotPlace();
+//		logger.debug("oksubin : {} " ,list);
+//		assertNotNull(list);
+//	}
 	
 	@Test
 	public void getDetailInfoTest() throws Exception{

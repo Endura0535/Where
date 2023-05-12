@@ -71,11 +71,11 @@ public class TripServiceImp implements TripService {
 	}
 	
 	@Override
-	public List<HotPlaceDto> getAllHotPlace() {
+	public List<AttractionDto> getAllHotPlace() {
 		try {
-			List<HotPlaceDto> hotplace = dao.getAllHotPlace();
+			List<AttractionDto> hotplace = dao.getAllHotPlace();
 			Collections.sort(hotplace, (o1,o2)->{
-				return o2.getLikes() - o1.getLikes();
+				return o2.getCount() - o1.getCount();
  			});
 			return hotplace;
 		} catch(SQLException e) {

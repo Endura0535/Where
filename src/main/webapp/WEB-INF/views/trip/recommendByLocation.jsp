@@ -265,7 +265,6 @@ document.getElementById("search-area").addEventListener("change", () =>{
     		  body: JSON.stringify({
     			  contentId: id,
     			  uid: `${userInfo.id}`,
-    			  count: 0,
     		  }),
     	  })
     	  

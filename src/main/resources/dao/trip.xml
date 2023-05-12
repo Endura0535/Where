@@ -15,6 +15,17 @@
   <result property="longitude" column="longitude"/>
 	</resultMap>
 	
+	<resultMap id="attractionResultMap2" type="AttractionDto">
+  <result property="contentId" column="content_id" />
+  <result property="address1" column="addr1"/>
+  <result property="address2" column="addr2"/>
+  <result property="title" column="title"/>
+  <result property="imgPath" column="first_image"/>
+  <result property="latitude" column="latitude"/>
+  <result property="longitude" column="longitude"/>
+  <result property="count" column="count"/>
+	</resultMap>
+	
 	<resultMap id="DetailDtoMap" type="DetailDto">
   <result property="address1" column="addr1"/>
   <result property="address2" column="addr2"/>
@@ -57,10 +68,10 @@
 		where content_id = #{contentId}
 	</select>
 	
-	<select id="getAllHotPlace" resultType="HotPlaceDto">
-		select content_id, count(*) as count 
-		from hotplace 
-		group by content_id
+	<select id="getAllHotPlace" resultMap="attractionResultMap2">
+		select a.*, count(*) as count from hotplace as h 
+		inner join attraction_info as a using(content_id)
+		group by content_id 
 	</select>
 	
 	<insert id="insertHotPlace" parameterType="HotPlaceDto">
