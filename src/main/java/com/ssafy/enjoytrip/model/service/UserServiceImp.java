@@ -20,12 +20,11 @@ public class UserServiceImp implements UserService {
 	
 	private final UserDao dao;
 
-	public User login(String id, String pw) {
-		System.out.println(id + "    " + pw);
+	public User login(User user) {
+		System.out.println(user.getId() + "    " + user.getPass());
 		try {
-			User user = dao.search(id);
 			log.debug("로그인.................................");
-
+			
 			if (user == null) {
 				System.out.println("user null");
 				throw new BookException("등록되지 않은 아이디입니다.");
