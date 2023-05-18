@@ -1,6 +1,7 @@
 package com.ssafy.enjoytrip.model.dao;
 
 import java.sql.SQLException;
+import java.util.Map;
 
 import com.ssafy.enjoytrip.model.dto.User;
 
@@ -17,4 +18,8 @@ public interface UserDao {
 	void update(User user) throws SQLException;
 	void remove(String id) throws SQLException;
 	User findPw(String name, String email) throws SQLException;
+	Object getRefreshToken(String userid) throws SQLException;
+	void saveRefreshToken(Map<String, String> map);
+	void deleteRefreshToken(Map<String, String> map);
+	User login(String id, String pass);
 }
