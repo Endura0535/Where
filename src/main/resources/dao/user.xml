@@ -6,6 +6,30 @@
 <mapper namespace='com.ssafy.enjoytrip.model.dao.UserDao'>
 
 	<!-- id는 Dao의 메서드 이름과 동일해야 한다. -->
+	
+	<select id="login" parameterType="User" resultType="User">
+		select *
+		from user
+		where id = #{id} and pass = #{pass}
+	</select>
+	
+	<select id="getRefreshToken" parameterType="string" resultType="string">
+		select token
+		from user
+		where id = #{id}
+	</select>
+	
+	<update id="saveRefreshToken" parameterType="map">
+		update user
+		set token = #{token}
+		where id = #{id}
+	</update>
+	
+	<update id="deleteRefreshToken" parameterType="map">
+		update user
+		set token = #{token, jdbcType=VARCHAR}
+		where id = #{id}
+	</update>
 
 	<insert id="regist" parameterType="User">
 		insert into user (id, name,

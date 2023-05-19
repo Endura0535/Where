@@ -10,7 +10,7 @@
 	<%@ include file="/WEB-INF/views/common/nav.jsp"%>
 
 
-	<diV id="main">
+	<div id="main">
 		<!-- ======= Intro Single ======= -->
 		<section class="intro-single">
 			<div class="container">
