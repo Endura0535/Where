@@ -29,17 +29,20 @@ public class UserServiceImp implements UserService {
 		
 		if (id == null || user.getPass() == null)
 			return null;
-		User loginUser = dao.login(user.getId(), "$2a$10$Ew.oH3WBajykJ//cYGnZE.kVZ9HWqgyPcbM0woUs6Sg5ttMuxuSV6");
+		
+		User loginUser = dao.search(id);
 		
 		if (loginUser == null) {
 			System.out.println("loginUser null");
 			throw new BookException("등록되지 않은 아이디입니다.");
 		}
+		
+		log.debug(user.getPass());
+		log.debug(loginUser.getPass());
+		if (!BCrypt.checkpw(user.getPass(),loginUser.getPass()))
+			throw new BookException("비밀 번호 오류 발생!!!!");
 			
-//		if (!BCrypt.checkpw(user.getPass(), loginUser.getPass()))
-//			throw new BookException("비밀 번호 오류 발생!!!!");
-
-		return user;
+		return loginUser;
 	
 //		try {
 //			log.debug("로그인.................................");
@@ -90,11 +93,11 @@ public class UserServiceImp implements UserService {
 	public void regist(User user) {
 		try {
 			User find = dao.search(user.getId());
+			log.debug(user.getPass());
 			if (find != null) {
 				throw new BookException("이미 등록된 아이디 입니다.");
 			}
 			user.setPass(BCrypt.hashpw(user.getPass(), BCrypt.gensalt()));
-			System.out.println(user.getPass());
 			dao.regist(user);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -105,8 +108,26 @@ public class UserServiceImp implements UserService {
 	@Override
 	public void update(User user) {
 		try {
-			user.setPass(BCrypt.hashpw(user.getPass(), BCrypt.gensalt()));
 			log.debug(user.toString());
+
+			String modiAtt = user.getPass();
+			if(modiAtt != null && modiAtt != "") {
+				user.setPass(BCrypt.hashpw(user.getPass(), BCrypt.gensalt()));
+				log.debug(user.toString());
+			}
+			
+			modiAtt = user.getEmail();
+			if(modiAtt != null && modiAtt != "")
+				user.setEmail(modiAtt);
+			
+			modiAtt = user.getAddr1();
+			if(modiAtt != null && modiAtt != "")
+				user.setAddr1(modiAtt);
+			
+			modiAtt = user.getAddr2();
+			if(modiAtt != null && modiAtt != "")
+				user.setAddr2(modiAtt);
+			
 			dao.update(user);
 		} catch (Exception e) {
 			e.printStackTrace();

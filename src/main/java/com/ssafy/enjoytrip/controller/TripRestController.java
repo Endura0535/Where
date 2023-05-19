@@ -22,6 +22,7 @@ import com.ssafy.enjoytrip.model.dto.AttractionDto;
 import com.ssafy.enjoytrip.model.dto.DetailDto;
 import com.ssafy.enjoytrip.model.dto.GugunDto;
 import com.ssafy.enjoytrip.model.dto.HotPlaceDto;
+import com.ssafy.enjoytrip.model.dto.SidoDto;
 import com.ssafy.enjoytrip.model.service.TripService;
 
 import io.swagger.annotations.Api;
@@ -46,10 +47,29 @@ public class TripRestController {
 	private static final String SUCCESS = "success";
 	
 	@ApiOperation(value = "여행지 목록 정보", notes = "검색 조건에 맞는 여행지 정보를 검색한 목록 정보")
+	@GetMapping("")
+	public ResponseEntity<?> trip() {
+		List<SidoDto> sidoList = tripService.getSidoList();
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("sidoList", sidoList);
+		
+		logger.debug("result.............result:{}",result);
+
+		if (sidoList != null && !sidoList.isEmpty()) {
+			return new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	@ApiOperation(value = "여행지 목록 정보", notes = "검색 조건에 맞는 여행지 정보를 검색한 목록 정보")
 	@GetMapping("/attrs")
 	public ResponseEntity<?> tripList(@RequestParam int sidoCode,@RequestParam int gugunCode,@RequestParam int contentTypeId) {
 		AreaCodeDto areaCode = new AreaCodeDto(sidoCode, gugunCode, contentTypeId);
-		logger.debug("areaCode..........................areaCode:{}",areaCode);
+		logger.debug("sidoCode..........................areaCode:{}",sidoCode);
+		logger.debug("gugunCode..........................areaCode:{}",gugunCode);
+		logger.debug("contentTypeId..........................areaCode:{}",contentTypeId);
 		List<AttractionDto> attrList = tripService.getAttractionList(areaCode);
 		
 		Map<String, Object> result = new HashMap<String, Object>();
