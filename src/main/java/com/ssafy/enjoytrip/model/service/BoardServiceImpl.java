@@ -51,7 +51,6 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void updateHit(int articleNo) throws Exception {
 		boardDao.updateHit(articleNo);
-
 	}
 
 	@Transactional

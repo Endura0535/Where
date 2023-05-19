@@ -6,16 +6,16 @@
 <mapper namespace='com.ssafy.enjoytrip.model.dao.BoardDao'>
 
 	<sql id="searchCon">
-		<if test="word !=null and word !='' ">
+		<if test="searchWord !=null and searchWord !='' ">
 			<choose>
-				<when test=" key == 'article_no' ">
-					articleNo = #{word}
+				<when test=" searchKey == 'article_no' ">
+					articleNo = #{searchWord}
 				</when>
-				<when test=" key == 'subject' ">
-					subject like concat('%',#{word},'%')
+				<when test=" searchKey == 'subject' ">
+					subject like concat('%',#{searchWord},'%')
 				</when>
-				<when test=" key == 'id' ">
-					id like concat('%',#{word},'%')
+				<when test=" searchKey == 'id' ">
+					id like concat('%',#{searchWord},'%')
 				</when>
 			</choose>
 		</if>
@@ -23,16 +23,21 @@
 
 	<insert id="writeArticle" parameterType="Board">
 		insert into board
-		(id, subject, content)
+		(id,
+		subject, content)
 		values(#{id},#{subject},#{content})
 	</insert>
 
-	<select id="listArticle" parameterType="PageBean" resultType="Board">
+	<select id="listArticle" parameterType="PageBean"
+		resultType="Board">
 		select *
 		from board
+		<where>
+			<include refid="searchCon" />
+		</where>
 		order by
 		<choose>
-			<when test="sortKey ==null or sortKey =='articleNo' ">
+			<when test="sortKey == null or sortKey == 'all' or sortKey =='articleNo' ">
 				articleNo desc
 			</when>
 			<when test=" sortKey == 'hit' ">
@@ -42,10 +47,11 @@
 				subject
 			</when>
 		</choose>
-		limit #{start}, #{interval}
+		<!-- limit #{start}, #{interval} -->
 	</select>
 
-	<select id="totalCount" parameterType="PageBean" resultType="int">
+	<select id="totalCount" parameterType="PageBean"
+		resultType="int">
 		select count(*)
 		from board
 		<where>
@@ -53,5 +59,30 @@
 		</where>
 	</select>
 
+	<select id="getArticle" resultType="Board">
+		select *
+		from board
+		where
+		articleNo=#{articleNo}
+	</select>
+
+	<delete id="deleteArticle">
+		delete from board
+		where articleNo=#{articleNo}
+	</delete>
+
+	<update id="modifyArticle">
+		update board set
+		subject = #{subject},
+		content=#{content}
+		where articleNo = #{articleNo}
+	</update>
+
+	<update id="updateHit">
+		update board set
+		hit = hit+1
+		where articleNo =
+		#{articleNo}
+	</update>
 
 </mapper>
