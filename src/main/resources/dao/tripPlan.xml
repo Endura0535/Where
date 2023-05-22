@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace='com.ssafy.enjoytrip.model.dao.TripPlanDao'>
+
+	<resultMap id="planResultMap" type="TripPlanDto">
+		<result property="uid" column="uid" />
+		<result property="planName" column="plan_name" />
+		<result property="dayNo" column="day_no" />
+		<result property="orderNo" column="order_no" />
+		<result property="attractionId" column="attraction_id" />
+		<result property="startDay" column="start_day" />
+	</resultMap>
+
+	<select id="getTripPlanList" resultMap="planResultMap">
+		select *
+		from trip_plan
+		where 1 = 1
+		<if test="uid != null">
+			and uid = #{uid}
+		</if>
+		<if test="planName != null">
+			and plan_name = #{planName}
+		</if>
+		<if test="dayNo != 0">
+			and day_no = #{dayNo}
+		</if>
+		<if test="orderNo != 0">
+			and order_no = #{orderNo}
+		</if>
+	</select>
+
+	<insert id="insertTripPlan" parameterType="TripPlanDto">
+		insert into trip_plan
+		(uid, plan_name, day_no, order_no, attraction_id, start_day)
+		values
+		(#{uid}, #{planName}, #{dayNo}, #{orderNo}, #{attractionId},#{startDay})
+	</insert>
+
+	<delete id="deleteTripPlan" parameterType="TripPlanDto">
+		delete from trip_plan
+		where 1 = 1
+		<if test="uid != null">
+			and uid = #{uid}
+		</if>
+		<if test="planName != null">
+			and plan_name = #{planName}
+		</if>
+		<if test="dayNo != 0">
+			and day_no = #{dayNo}
+		</if>
+		<if test="orderNo != 0">
+			and order_no = #{orderNo}
+		</if>
+	</delete>
+
+	<select id="getTripCount" resultType="int">
+		select count(*) from trip_plan
+		where 1 = 1
+		<if test="uid != null">
+			and uid = #{uid}
+		</if>
+		<if test="planName != null">
+			and plan_name = #{planName}
+		</if>
+		<if test="dayNo != 0">
+			and day_no = #{dayNo}
+		</if>
+		<if test="orderNo != 0">
+			and order_no = #{orderNo}
+		</if>
+	</select>
+
+
+</mapper>
