@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ssafy.enjoytrip.model.dto.AttractionDto;
 import com.ssafy.enjoytrip.model.dto.Board;
 import com.ssafy.enjoytrip.model.dto.TripPlanDto;
 import com.ssafy.enjoytrip.model.service.TripPlanService;
@@ -37,6 +40,15 @@ public class TripPlanRestController {
 	
 	private static final String SUCCESS = "success";
 	private static final String FAIL = "fail";
+	
+	@ApiOperation(value = "여행 계획 등록", notes = "여행 계획을 등록한다.")
+	@PostMapping("")
+	private ResponseEntity<String> planRegister(@RequestBody List<TripPlanDto> submitPlan) throws Exception {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+		log.debug("tripPlan......[]",submitPlan);
+		return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+	}
 	
 	@ApiOperation(value = "여행 계획 가져오기", notes = "검색 조건에 맞는 여행지 계획을 검색한 목록 정보")
 	@GetMapping("/list")

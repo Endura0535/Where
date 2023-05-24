@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.enjoytrip.model.dto.AreaCodeDto;
 import com.ssafy.enjoytrip.model.dto.AttractionDto;
+import com.ssafy.enjoytrip.model.dto.Board;
 import com.ssafy.enjoytrip.model.dto.DetailDto;
 import com.ssafy.enjoytrip.model.dto.GugunDto;
 import com.ssafy.enjoytrip.model.dto.HotPlaceDto;
@@ -124,7 +126,9 @@ public class TripRestController {
 
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("hotplaces", hotplaces);
-
+		
+//		return new ResponseEntity<List<AttractionDto>>(hotplaces, HttpStatus.OK);
+		
 		if (hotplaces != null && !hotplaces.isEmpty()) {
 			return new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
 		} else {
@@ -147,9 +151,10 @@ public class TripRestController {
 	
 	@ApiOperation(value = "핫플레이스", notes = "핫플레이스 등록(좋아요)")
 	@PostMapping("/hotplace")
-	private ResponseEntity<?> hotRegi(HotPlaceDto hotplaceDto) {
-		tripService.hotRegi(hotplaceDto);
-		logger.debug("hotplaceDto.insert.............................hotplaceDto:{}", hotplaceDto);
+	private ResponseEntity<?> hotRegi(@RequestBody HotPlaceDto hotPlaceDto) {
+		logger.debug("핫플정보: {}", hotPlaceDto);
+		tripService.hotRegi(hotPlaceDto);
+		logger.debug("hotplaceDto.insert.............................hotplaceDto:{}", hotPlaceDto);
 		
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
