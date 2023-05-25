@@ -58,7 +58,7 @@
 	</select>
 	
 	<select id="getDetailInfo" parameterType="int" resultMap="DetailDtoMap">
-		select title, addr1 , addr2 , first_image , overview , zipcode , tel
+		select ai.content_id, title, addr1 , addr2 , first_image , overview , zipcode , tel
 		from attraction_info ai , attraction_description ad
 		where ai.content_id = #{contentId} and ai.content_id = ad.content_id
 	</select>

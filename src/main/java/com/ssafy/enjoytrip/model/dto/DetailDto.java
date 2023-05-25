@@ -3,6 +3,7 @@ package com.ssafy.enjoytrip.model.dto;
 import lombok.Data;
 
 public class DetailDto {
+	private int contentId;
 	private String title;
 	private String address1;
 	private String address2;
@@ -11,9 +12,10 @@ public class DetailDto {
 	private String overview;
 	private String telNumber;
 	
-	public DetailDto(String title, String address1, String address2, String imgPath, String zipCode, String overview,
-			String telNumber) {
+	public DetailDto(int contentId, String title, String address1, String address2, String imgPath, String zipCode,
+			String overview, String telNumber) {
 		super();
+		this.contentId = contentId;
 		this.title = title;
 		this.address1 = address1;
 		this.address2 = address2;
@@ -21,6 +23,14 @@ public class DetailDto {
 		this.zipCode = zipCode;
 		this.overview = overview;
 		this.telNumber = telNumber;
+	}
+
+	public int getContentId() {
+		return contentId;
+	}
+
+	public void setContentId(int contentId) {
+		this.contentId = contentId;
 	}
 
 	public String getTitle() {

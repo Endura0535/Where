@@ -13,6 +13,12 @@
 		<result property="attractionId" column="attraction_id" />
 		<result property="startDay" column="start_day" />
 	</resultMap>
+	
+	<resultMap id="planHeaderResultMap" type="TripPlanHeaderDto">
+		<result property="uid" column="uid" />
+		<result property="planName" column="plan_name" />
+		<result property="startDay" column="start_day" />
+	</resultMap>
 
 	<select id="getTripPlanList" resultMap="planResultMap">
 		select *
@@ -24,12 +30,16 @@
 		<if test="planName != null">
 			and plan_name = #{planName}
 		</if>
-		<if test="dayNo != 0">
-			and day_no = #{dayNo}
+	</select>
+	
+	<select id="getTripPlanHeaders" parameterType="string" resultMap="planHeaderResultMap">
+		select plan_name, start_day
+		from trip_plan
+		where 1 = 1
+		<if test="uid != null">
+			and uid = #{uid}
 		</if>
-		<if test="orderNo != 0">
-			and order_no = #{orderNo}
-		</if>
+		group by plan_name, uid
 	</select>
 
 	<insert id="insertTripPlan" parameterType="TripPlanDto">

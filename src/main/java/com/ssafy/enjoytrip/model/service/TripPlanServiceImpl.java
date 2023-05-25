@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.enjoytrip.model.dao.TripPlanDao;
 import com.ssafy.enjoytrip.model.dto.TripPlanDto;
+import com.ssafy.enjoytrip.model.dto.TripPlanHeaderDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,12 @@ public class TripPlanServiceImpl implements TripPlanService {
 	@Override
 	public List<TripPlanDto> getTripplan(TripPlanDto tripplanDto) throws Exception {
 		return tripplanDao.getTripPlanList(tripplanDto);
+	}
+	
+	@Transactional
+	@Override
+	public List<TripPlanHeaderDto> getTripPlanHeader(String uid) throws Exception {
+		return tripplanDao.getTripPlanHeaders(uid);
 	}
 
 	@Transactional
