@@ -11,9 +11,40 @@ public class DetailDto {
 	private String zipCode;
 	private String overview;
 	private String telNumber;
-	
+	private double latitude;
+	private double longitude;
+
+	public DetailDto(int contentId, String title, String address1, String address2, String imgPath, String zipCode, String overview, String telNumber, double latitude, double longitude) {
+		this.contentId = contentId;
+		this.title = title;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.imgPath = imgPath;
+		this.zipCode = zipCode;
+		this.overview = overview;
+		this.telNumber = telNumber;
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
 	public DetailDto(int contentId, String title, String address1, String address2, String imgPath, String zipCode,
-			String overview, String telNumber) {
+					 String overview, String telNumber) {
 		super();
 		this.contentId = contentId;
 		this.title = title;

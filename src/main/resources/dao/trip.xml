@@ -34,6 +34,8 @@
   <result property="imgPath" column="first_image"/>
   <result property="zipCode" column="zipCode"/>
   <result property="telNumber" column="tel"/>
+  <result property="latitude" column="latitude"/>
+  <result property="longitude" column="longitude"/>
 	</resultMap>
 
 	<!-- id는 Dao의 메서드 이름과 동일해야 한다. -->
@@ -58,7 +60,7 @@
 	</select>
 	
 	<select id="getDetailInfo" parameterType="int" resultMap="DetailDtoMap">
-		select ai.content_id, title, addr1 , addr2 , first_image , overview , zipcode , tel
+		select ai.content_id, title, addr1 , addr2 , first_image , overview , zipcode , tel , latitude, longitude
 		from attraction_info ai , attraction_description ad
 		where ai.content_id = #{contentId} and ai.content_id = ad.content_id
 	</select>
